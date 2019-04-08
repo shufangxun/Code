@@ -1,12 +1,10 @@
 def FindMax(array,T):
-
     ## 切割法
     ### 运行时间：228ms
     ### 占用内存：5624k
+    ## 初始化--右上角 i:行 j:列
     rows = len(array)
     columns = len(array[0])
-
-    ## 初始化--右上角 i:行 j:列
     i = 0  
     j = columns - 1
 
