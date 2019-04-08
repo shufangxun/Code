@@ -1,5 +1,6 @@
 def FindMax(array,T):
-    ## 获得数组的行和列
+
+    ## 切割法
     ### 运行时间：228ms
     ### 占用内存：5624k
     rows = len(array)
@@ -16,12 +17,11 @@ def FindMax(array,T):
             j -= 1
         else:
             i += 1
-
     ## 循环里没有则返回False        
     return False
 '''
 def FindMax(array,T):
-    ### 每一行做二分法
+    ### 二分法
     ### 运行时间：440ms
     ### 占用内存：5840k
     rows = len(array)
@@ -37,7 +37,6 @@ def FindMax(array,T):
                 high = mid - 1
             else:
                 return True
-
     return False
 '''
     

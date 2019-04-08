@@ -1,8 +1,6 @@
 def MinInRotate(array):
     low = 0
     high = len(array) - 1
-    
-
     '''
         分三类：
         1.特殊情况：值为0和1
