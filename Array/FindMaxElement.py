@@ -1,4 +1,4 @@
-def FindMax(array,T):
+def findMax(array,T):
     ## 切割法
     ### 运行时间：228ms
     ### 占用内存：5624k
@@ -18,7 +18,7 @@ def FindMax(array,T):
     ## 循环里没有则返回False        
     return False
 '''
-def FindMax(array,T):
+def findMax(array,T):
     ### 二分法
     ### 运行时间：440ms
     ### 占用内存：5840k
@@ -40,4 +40,4 @@ def FindMax(array,T):
     
 if __name__ == "__main__":
     arr = [[1,2,8,9],[2,4,9,12],[4,7,10,13],[6,8,11,15]]
-    print(FindMax(arr,7))
+    print(findMax(arr,7))
