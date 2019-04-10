@@ -9,9 +9,6 @@ def reorderArray1(array):
         '''
     return sorted(array, key=lambda x:x%2==0)
 
-      
-    
-
 if __name__ == "__main__":
-     arr = [1,2,3,4,5]
-     print(reorderArray1(arr))   
+    arr = [1,2,3,4,5]
+    print(reorderArray1(arr))   
