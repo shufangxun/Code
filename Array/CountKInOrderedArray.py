@@ -26,7 +26,7 @@ def firstK(array, K):
         elif array[mid] < K:
             front = mid + 1
         else:  ## array[mid] = K
-            if array[mid - 1]!=K or mid == front :
+            if mid == front or array[mid - 1]!=K:
                 return mid
             else: ## array[mid - 1] == K
                 rear = mid - 1
@@ -44,7 +44,7 @@ def lastK(array, K):
         elif array[mid] > K:
             rear = mid - 1
         else:  ## array[mid] = K
-            if array[mid + 1]!=K  or mid == rear :
+            if mid == rear or array[mid + 1]!=K:  ## 先判断前面，后面这个有可能溢出报错
                 return mid
             else: ## array[mid - 1] == K
                 front = mid + 1
@@ -52,5 +52,5 @@ def lastK(array, K):
     return -1
 
 if __name__ == "__main__":
-    arr = [1,2,3,3,3]
-    print(countK(arr,3))
+    arr = [1,1,1,3,3]
+    print(countK(arr,1))
