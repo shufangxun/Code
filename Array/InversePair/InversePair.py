@@ -1,0 +1,2 @@
+def inversepair(array):
+   pass 
