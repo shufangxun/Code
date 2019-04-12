@@ -13,14 +13,14 @@ def morethanHalf2(array):
     if L == 0:
         return 0
         
-    index = Partition(array, L, low, high)
+    index = Partition(array, low, high)
     while(index != mid):
         if index > mid:
             high = index - 1
-            index = Partition(array, L, low, high)
+            index = Partition(array, low, high)
         else:
             low = index + 1
-            index = Partition(array, L, low, high)
+            index = Partition(array, low, high)
         
     res = array[index]
     count = 0
@@ -30,7 +30,7 @@ def morethanHalf2(array):
     
     return res if count*2 > L else 0
 
-def Partition(array, lenth, front, rear):
+def Partition(array, front, rear):
     pivot = array[front]
     while front < rear:
         while front < rear and array[rear] >= pivot: # 为什么这里重复front < rear
@@ -44,5 +44,5 @@ def Partition(array, lenth, front, rear):
 
 
 if __name__ == "__main__":
-    arr = [1,2,2,2,2,3,4]
+    arr = [1,2,2,2,3,4]
     print(morethanHalf2(arr))
