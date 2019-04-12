@@ -23,7 +23,7 @@ def mergeSort(array):
 
 def merge(leftPart, rightPart):
     '''
-        归并的实现
+        归并实现
         '''
     res = []
     while leftPart and rightPart:     ## 这个条件控制其中一个全部归并： 4578 1236
