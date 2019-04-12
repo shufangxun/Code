@@ -1,4 +1,4 @@
-def findelement1(array,T):
+def findT1(array,T):
     ## 找到二维数组中的元素
     '''
     切割法
@@ -25,4 +25,4 @@ def findelement1(array,T):
   
 if __name__ == "__main__":
     arr = [[1,2,8,9],[2,4,9,12],[4,7,10,13],[6,8,11,15]]
-    print(findelement1(arr,7))
+    print(findT1(arr,7))

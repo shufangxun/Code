@@ -1,4 +1,4 @@
-def findelement2(array,T):
+def findT2(array,T):
     
 
     '''
@@ -23,4 +23,4 @@ def findelement2(array,T):
 
 if __name__ == "__main__":
     arr = [[1,2,8,9],[2,4,9,12],[4,7,10,13],[6,8,11,15]]
-    print(findelement2(arr,7))
+    print(findT2(arr,7))
