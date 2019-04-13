@@ -35,10 +35,11 @@ def Partition(array, front, rear):
     while front < rear:
         while front < rear and array[rear] >= pivot: # 为什么这里重复front < rear
             rear -= 1
-        array[front] = array[rear]
+        # array[front] = array[rear]
         while front < rear and array[front] < pivot:
             front += 1
-        array[rear] = array[front]
+        # array[rear] = array[front]
+        array[rear], array[front] = array[front], array[rear]
     array[front] = pivot
     return front
 
