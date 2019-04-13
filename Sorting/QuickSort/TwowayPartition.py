@@ -19,7 +19,7 @@ def Partition(array, front, rear):
         '''
     pivot = array[front]
     while front < rear:
-        while front < rear and array[rear] >= pivot: # 为什么这里重复front < rear
+        while front < rear and array[rear] >= pivot: # 为什么这里重复front < rear 防止一样的重复操作
             rear -= 1
         while front < rear and array[front] < pivot:
             front += 1
