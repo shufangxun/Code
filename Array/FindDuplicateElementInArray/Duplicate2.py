@@ -13,9 +13,10 @@ def duplicate2(array, duplication = []):
             hashmap[array[i]] = 1
         else:
             duplication.append(array[i])
-            return True
-    return False
+            # return True
+    print(duplication)
+    # return False
 
 if __name__ == "__main__":
-    arr = [2,1,3,1,4]
+    arr = [2,1,3,1,3,4]
     print(duplicate2(arr))

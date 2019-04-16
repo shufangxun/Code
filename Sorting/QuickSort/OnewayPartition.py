@@ -16,9 +16,9 @@ def Quicksort2(array, front, rear):
 def partition(array, front, rear):
       pivot = array[front]
       for i in range(front + 1, rear + 1):
-          if array[i] <= array[front]:
-              pivot += 1
-              array[i], array[pivot] = array[pivot], array[i]
+          if array[i] <= pivot:
+              front += 1
+              array[i], array[front] = array[front], array[i]
       array[pivot], array[begin] = array[begin], array[pivot]
       return pivot
 

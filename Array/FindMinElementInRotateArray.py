@@ -1,4 +1,5 @@
 def MinInRotate(array):
+    ## 找到旋转数组中的最小值
     low = 0
     high = len(array) - 1
     '''
