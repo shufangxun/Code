@@ -18,5 +18,5 @@ def duplicate2(array, duplication = []):
     # return False
 
 if __name__ == "__main__":
-    arr = [2,1,3,1,3,4]
+    arr = [30,1,30,3,3,4]
     print(duplicate2(arr))
