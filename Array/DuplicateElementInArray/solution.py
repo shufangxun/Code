@@ -17,5 +17,5 @@ class Solution(object):
                     hashmap[nums[i]] = 1
                 else:
                     return nums[i]
-        return -1
+        return -1  # 不包含重复数字
                     
