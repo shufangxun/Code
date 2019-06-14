@@ -130,10 +130,14 @@ class Linklist:
         return self.size
     
 
-    # 初始化链表
-    def initList(self, data):
-        pass
-
+    def print_reverse(self):
+        p = self.head
+        res = []
+        p = p.next 
+        while p :
+            res.insert(0,p.element)
+            p = p.next
+        print(res)
 
 if __name__ == "__main__":
     l = Linklist()
@@ -146,6 +150,7 @@ if __name__ == "__main__":
     l.remove(6)
     # print(l.get_element(2))
     l.get_index(10)
+    l.print_reverse()
     l.display()
    
     
