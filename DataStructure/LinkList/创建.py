@@ -2,6 +2,16 @@ class Node:
     def __init__(self,element):
         self.element = element
         self.next = None
+
+
+def reverse(head):
+        prev = None
+        while head:
+            temp = head.next
+            head.next = prev
+            prev = head
+            head = temp
+        return prev
     
 if __name__ == "__main__":
 
@@ -11,14 +21,15 @@ if __name__ == "__main__":
     node3 = Node(8)
     node4 = Node(3)
 
-    # 连接成链表
+    # 连接链表
     head = node1
     head.next = node2
     node2.next = node3
     node3.next = node4
 
-    while head:
-        print(head.element)
-        head = head.next 
 
+    s = reverse(head)
+    while s:
+        print(s.element)
+        s = s.next 
     

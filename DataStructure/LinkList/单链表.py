@@ -129,28 +129,15 @@ class Linklist:
     def get_length(self):
         return self.size
     
-
-    def print_reverse(self):
-        p = self.head
-        res = []
-        p = p.next 
-        while p :
-            res.insert(0,p.element)
-            p = p.next
-        print(res)
+    
+    
 
 if __name__ == "__main__":
     l = Linklist()
+    l.add(1)
     l.add(2)
-    l.append(1)
-    l.append(19)
-    l.add('shu') 
-    l.insert(88,1)
-    l.insert('fang',5)
-    l.remove(6)
-    # print(l.get_element(2))
-    l.get_index(10)
-    l.print_reverse()
+    l.add(3)
+    
     l.display()
    
     
