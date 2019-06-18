@@ -1,5 +1,3 @@
-from NodeClass import Node
-
 def reverse1(head):
     # 从前往后反转各个结点的指针域的指向
     pre = None
@@ -12,3 +10,13 @@ def reverse1(head):
         cur = nex        # 下一个指针变成当前
     return pre
     
+def reverse2(head):
+    
+    if not head or not head.next:
+        return head
+        
+    p = reverse2(head.next)
+    next_node = head.next    #        head -> next_node 
+    next_node.next = head    #        head <- next_node 
+    head.next = None         # [x] <- head <- next_node 
+    return p

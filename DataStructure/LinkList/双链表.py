@@ -88,6 +88,18 @@ class DLinkList:
 
             new_node.pre = p
             p.next = new_node
+    
+    def reverse1(self):
+        pre = None
+        cur = self.head
+        while cur:
+            nex = cur.next
+            cur.next = cur.pre
+            cur.pre = nex
+
+            pre = cur
+            cur = nex
+        return pre
 
 if __name__ == "__main__":
     l = DLinkList()
@@ -96,5 +108,6 @@ if __name__ == "__main__":
     l.add(13)
     l.insert(112,2)
     l.append(1)
+    l.reverse1()
     l.traverse()
     

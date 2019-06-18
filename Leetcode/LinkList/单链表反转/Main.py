@@ -1,5 +1,4 @@
-from Iterative import reverse1
-from Recursive import reverse2
+from Solution import *
 from NodeClass import Node
 
 # 创建节点
@@ -15,12 +14,14 @@ node2.next = node3
 node3.next = node4
 
 # 迭代反转
+'''
 s1 = reverse1(head)
 while s1:
     print(s1.element)
     s1 = s1.next 
-
+'''
 # 递归反转
+
 s2 = reverse2(head)
 while s2:
     print(s2.element)
