@@ -60,7 +60,7 @@ class Linklist:
                     raise Exception('out of range')  # 尾节点有数据
                 idx -= 1
 
-            new_node.next = p.next # 此时p.next 指向第index个节店
+            new_node.next = p.next # 此时 p.next 指向第index个节店
             p.next = new_node
 
             self.size += 1            
@@ -112,13 +112,22 @@ class Linklist:
 
 
     # 遍历链表并存储在数组
-    def display(self):
+    def traverse(self):
         elems = []
 
         while self.head.next != None:
             self.head = self.head.next 
             elems.append(self.head.element)  
         print(elems)
+
+    # 反转打印链表
+    def reverse(self):
+        elem = []
+        p = self.head.next
+        while p != None:
+            elem.insert(0, p.element)
+            p = p.next
+        print(elem)
 
 
     # 判断链表是否为空
@@ -134,11 +143,12 @@ class Linklist:
 
 if __name__ == "__main__":
     l = Linklist()
+    l.append(10)
     l.add(1)
     l.add(2)
     l.add(3)
-    
-    l.display()
+    l.reverse()
+    l.traverse()
    
     
     
