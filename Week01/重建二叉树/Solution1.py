@@ -1,16 +1,13 @@
 
-class TreeNode(object):
-     def __init__(self, x):
-         self.val = x
-         self.left = None
-         self.right = None
+from Treenode import TreeNode
+
 class Solution(object):
     def buildTree(self, preorder, inorder):
         '''
         preorder = list[int]
         inorder = list[int]
         return treenode
-        递归法
+        递归法1
         '''
         
         if not preorder or not inorder: # 当某一子树无元素,输出None
