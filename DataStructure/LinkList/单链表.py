@@ -66,8 +66,8 @@ class Linklist:
             self.size += 1            
     
 
-    # 删除第idx个节点
-    def remove(self, idx):
+    # 删除第idx个节点: O(n)
+    def remove_by_idx(self, idx):
         
         if idx == 0:
             raise Exception('can not remove,as 0 index is head') # 第0个是头节点
@@ -82,6 +82,8 @@ class Linklist:
             p.next = p.next.next # 前一个指针直接跨越过去
 
             self.size -= 1  
+
+    
 
 
     # 获取第idx节点数据
@@ -109,7 +111,6 @@ class Linklist:
             p = p.next
         
         print('can not find')
-
 
     # 遍历链表并存储在数组
     def traverse(self):
