@@ -25,11 +25,13 @@ class Solution(object):
                     return self.isMatch(s, p[2 : ])
                 else:
                     # 三种匹配
+                    # isMatch(s, p[2 : ])  s = 'aac' p = 'b*b*b*ac'
+                    # isMatch(s[1 : ], p)  s = 'aac' p = 'b*c'
+                    # isMatch(s[1 : ], p[2 : ]) s = 'aac' p = 'b*ac'
                     return self.isMatch(s[1 : ], p) or self.isMatch(s[1 : ], p[2 : ]) or self.isMatch(s, p[2 : ])
 
             else: # 第二个不是'*'
                 if s[0] == p[0] or p[0] == '.':
                     return self.isMatch(s[1 : ], p[1 : ])
-                
                 else:
                     return False
