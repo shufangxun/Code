@@ -5,8 +5,6 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
-
-    
         # p 和 s 有空
         if len(s) == 0 and len(p) == 0:
             return True
@@ -17,7 +15,8 @@ class Solution(object):
                 return self.isMatch(s, p[2 : ])  # 向后继续匹配
             else:
                 return False
-        ## s 和 p 都非空时
+                
+        ## s 和 p 都非空
         else:
             if len(p) >= 2 and p[1] == '*':
                 # 匹配0个字符
