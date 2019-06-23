@@ -22,6 +22,6 @@ class Solution(object):
     def dfs(self, x, y):
         if not self.is_valid(x, y) and (x, y) in self.memo:
             return 0
-            
+
         self.memo[(x,y)] = 1
-        return self.dfs(x-1, y) + self.dfs(x, y-1) + self.dfs(x+1, y) + self.dfs(x, y+1) + 1
+        return 1 + self.dfs(x-1, y) + self.dfs(x, y-1) + self.dfs(x+1, y) + self.dfs(x, y+1) 
