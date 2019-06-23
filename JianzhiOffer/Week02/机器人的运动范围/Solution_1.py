@@ -15,6 +15,7 @@ class Solution:
         count = 0
         if x < rows and x >= 0 and y < cols and y >= 0 and self.judge(threshold, x, y) and visit[x][y] == False:
             visit[x][y] = True
+            # visit数组一直传参下去,保证了变化能够更新
             count = 1+ self.dfs(threshold, rows, cols, visit, x-1, y) \
                     + self.dfs(threshold, rows, cols, visit, x+1, y) \
                     + self.dfs(threshold, rows, cols, visit, x, y-1) \
