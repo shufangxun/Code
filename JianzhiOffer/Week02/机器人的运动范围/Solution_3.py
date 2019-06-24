@@ -9,12 +9,15 @@ class Solution(object):
         """
         if not rows or not cols:
             return 0
+        # 初始化
         res = 1
         memo = set()
         memo.add((0,0))
         q = deque([(0,0)])
         dx = [-1, 0, 1, 0]
         dy = [0, 1, 0, -1]
+
+        # 判断周围四个方向的点
         while q:
             x, y = q.popleft()
             for i in range(4):
