@@ -21,12 +21,12 @@ class Solution(object):
         while q:
             x, y = q.popleft()
             for i in range(4):
-                xx = x + dx[i]
-                yy = y + dy[i]
-                if self.is_valid(xx, yy, rows, cols, threshold) and (xx, yy) not in memo:
+                x_new = x + dx[i]
+                y_new = y + dy[i]
+                if self.is_valid(x_new, y_new, rows, cols, threshold) and (x_new, y_new) not in memo:
                     res += 1
-                    q.append((xx, yy))
-                    memo.add((xx, yy))
+                    q.append((x_new, y_new))
+                    memo.add((x_new, y_new))
         return res
 
     def is_valid(self, x, y, m, n, k):

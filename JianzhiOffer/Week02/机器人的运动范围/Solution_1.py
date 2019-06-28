@@ -6,7 +6,7 @@ class Solution:
         return self.dfs(threshold, rows, cols, visit, 0, 0)
       
     def judge(self, threshold, x, y):
-        if sum(map(int,str(ｘ) + str(y))) <= threshold: # 精髓
+        if sum(map(int,str(x) + str(y))) <= threshold: # 精髓
             return True
         else:
             return False
