@@ -68,6 +68,8 @@ class Node:
             if node.right:
                 queue.append(node.right)
 
+
+
 if __name__=='__main__':
     root=Node('D',Node('B',Node('A'),Node('C')),Node('E',right=Node('G',Node('F'))))
     root.preTraverse(root)
