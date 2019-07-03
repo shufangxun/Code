@@ -19,10 +19,13 @@ class Solution:
             return
         for i in range(len(nums)):
             if not used[i]:
-                if i > 0 and nums[i] == nums[i - 1]:  ## 判断重复
+                if i > 0 and nums[i] == nums[i - 1] and not used[i - 1]:  ## 判断重复
                     continue
                 used[i] = True
                 path.append(nums[i])
                 self.dfs(nums, idx + 1, path, used, res)
                 used[i] = False
                 path.pop()   # 为啥pop()
+
+
+# [1,1,3] 测试   
