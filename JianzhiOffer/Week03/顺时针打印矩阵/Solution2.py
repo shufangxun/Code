@@ -4,8 +4,6 @@ class Solution(object):
         :type matrix: List[List[int]]
         :rtype: List[int]
         """
-        
-        
         res = []
         r = len(matrix)
         if r == 0:
@@ -16,10 +14,7 @@ class Solution(object):
         if matrix == [] or r <= 0 or c <= 0:
             return res
         
-        
-
         start = 0 
-        
         while r > 2 * start and c > 2 * start:  # 起始点
             res.extend(self.OneCycle(matrix , r, c, start))
             start += 1   # 到下个循环起始点
