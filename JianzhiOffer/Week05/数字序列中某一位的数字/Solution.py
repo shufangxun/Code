@@ -10,26 +10,30 @@ class Solution(object):
         if n < 0:
             return 
         
+            
         k = 1
-        n -= k * 10 ** k
-        while n:
+        n -= k * 10 ** k 
+        while n >= 0:
             k += 1
-            n -= k * 10 ** k
-        # 此时 n是负数 , k是下一个开始的位数
-        n += k * 10 ** k
-        # 从 10 ^ (k-1) 开始s个数
-        s = n // k 
-        t = n % k 
-        final = 10 ** (k - 1) + s - 1
+            n -= int(k * 10 ** k * 0.9)
+        
+        if k == 1:
+            n += k * 10 ** k
+            t = 0
+            final = n
+        else:
+            n += int(k * 10 ** k * 0.9)
+            # 从 10 ^ (k-1) 开始s个数
+            s = n // k 
+            t = n % k 
+            final = 10 ** (k - 1) + s
+    
         # 再数 t 位
 
-        while t > 0:
-            final = final // 10
-            t -= 1
-
-        return final 
+        u = str(final)
+        digit = list(map(int, u))[t]  
+        return digit
         
-
      
         
 
