@@ -10,9 +10,9 @@ class Solution(object):
         base, round = 1, n
         while round :
             weight = round % 10
-            round = round // 10   # 当前位的前面位
+            round = round // 10   
             count += base * round
-            if  weight > 1:
+            if weight > 1:
                 count += base
             if weight == 1:
                 count += (n % base) + 1

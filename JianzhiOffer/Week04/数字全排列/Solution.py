@@ -8,8 +8,8 @@ class Solution:
             return []
         
         nums.sort()
-        used = [False] * len(nums)
         res = [] 
+        used = [False] * len(nums)
         self.dfs(nums, 0, [], used, res)
         return res
     
@@ -27,5 +27,4 @@ class Solution:
                 used[i] = False
                 path.pop()   # 为啥pop()
 
-
-# [1,1,3] 测试   
+ 
