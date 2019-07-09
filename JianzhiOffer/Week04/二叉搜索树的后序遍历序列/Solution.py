@@ -4,3 +4,4 @@ class Solution:
         :type sequence: List[int]
         :rtype: bool
         """
+        
