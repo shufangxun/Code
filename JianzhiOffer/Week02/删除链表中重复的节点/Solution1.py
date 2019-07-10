@@ -10,7 +10,7 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        # 注意排序这个关键点
+        # 保留一个重复结点
         if head is None or head.next is None:
             return head
         
