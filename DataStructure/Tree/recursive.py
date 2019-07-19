@@ -15,15 +15,15 @@ class Node:
     def midTraverse(self, root):
         if root is None:
             return 
-        self.preTraverse(root.left)
+        self.midTraverse(root.left)
         print(root.value)
-        self.preTraverse(root.right)
+        self.midTraverse(root.right)
 
     def postTraverse(self, root):
         if root is None:
             return 
-        self.preTraverse(root.left)
-        self.preTraverse(root.right)
+        self.postTraverse(root.left)
+        self.postTraverse(root.right)
         print(root.value)
 
 if __name__=='__main__':
