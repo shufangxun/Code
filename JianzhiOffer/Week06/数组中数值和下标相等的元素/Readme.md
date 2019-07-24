@@ -17,3 +17,5 @@
 **算法**
 
 二分法 
+1. 若num[mid] < mid 
+2. 若num[mid] >= mid
