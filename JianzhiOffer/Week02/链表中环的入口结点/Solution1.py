@@ -10,12 +10,20 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        p = head.next
-        while p:
-            if p.next == p:
-                return p.val
-            p = p.next
-
-        return None
+        
+        try:
+            slow = head.next
+            fast = head.next.next
+            while fast != slow:
+                fast = fast.next.next
+                slow = slow.next
+            slow = head
+            while slow != fast:
+                slow = slow.next
+                fast = fast.next
+            return slow
+            
+        except: 
+            return None
         
 
