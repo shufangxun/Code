@@ -1,9 +1,9 @@
 def quicksort(array):
-   '''
+    '''
         避免手动输入长度信息 http://interactivepython.org/courselib/static/pythonds/SortSearch/TheQuickSort.html
         '''
-   Quicksort2(array,0,len(array)-1)
-   return array
+    Quicksort2(array,0,len(array)-1)
+    return array
 
 def Quicksort2(array, front, rear):
 
