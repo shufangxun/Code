@@ -9,11 +9,14 @@ class Solution(object):
     # 每个列表表示找到的路径
     def findPath(self, root, sum):
         res = []
+
+        # 递归结束条件
         if not root:
             return []
         if not root.left and not root.right and sum == root.val:
             return [[root.val]]
 
+        # 递归过程
         left = self.findPath(root.left, sum-root.val)
         right = self.findPath(root.right, sum-root.val)
         for subpath in left + right:

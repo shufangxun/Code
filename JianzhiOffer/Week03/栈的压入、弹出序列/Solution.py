@@ -11,6 +11,7 @@ class Solution(object):
         if not pushV and not popV:
             return True
         
+        # 辅助栈
         stack = []
         for v in pushV:
             stack.append(v)
