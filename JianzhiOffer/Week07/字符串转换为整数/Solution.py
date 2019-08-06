@@ -1,31 +1,38 @@
 class Solution(object):
-    def strToInt(self, str):
+    def strToInt(self, s):
         """
         :type str: str
         :rtype: int
         """
-        if not str:
+        if not s:
             return 0
+
         flag = 1
-        str = str.lstrip() # 左边空格全部消除
-        if str[0] == '+':
-            str = str[1:]
-        elif str[0] == '-':
-            flag = -1
-            str = str[1:]
         res = 0
-        i = 0
-        while i < len(str):
-            if str[i].isdigit():
+        nums = {str(i) for i in range(10)} # 集合解析
+        s = s.lstrip()
+
+        # 只显式讨论这两种
+        # 首位不是数字和+.-,实际上就是返回0
+        # 首位是数字,下面直接操作,不需要从1开始
+        if s[0] == '+':
+            s = s[1:]
+        elif s[0] == '-':
+            s = s[1:]
+            flag = -1
+        
+        for i in s:
+            if i in nums:
                 res *= 10
-                res += int(str[i]) 
-                i += 1
+                res += int(i)
             else:
                 break
-                
+
         res *= flag
+
         if res > 2 ** 31 - 1:
              return  2 ** 31 - 1 
         if res < - 2 ** 31:
              return  - 2 ** 31 
-        return res 
+        return res
+        
