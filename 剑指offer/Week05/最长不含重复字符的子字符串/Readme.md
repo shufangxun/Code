@@ -10,3 +10,20 @@
 
 输出：3
 ```
+
+**算法**
+
+- 滑动窗口法
+    - 设置一个**按照输入顺序**存储的集合, 当发现当前元素时, 按照顺序删除直到当前元素  
+    [参考](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/python-hua-dong-chuang-kou-xun-xu-jian-jin-de-3ge-/)
+
+- 动态规划法  
+  用f(i)表示以i个字符结尾不包含重复子字符串的最长长度，从左向右扫描
+
+1. 若第i个字符在之前没出现过，则 f(i) = f(i-1) + 1;
+
+2. 若第i个字符在之前出现过，计算第i个字符距离上次出现之间的距离为d
+
+    - 若d <= f(i-1)，则说明第i个字符上次出现在f(i-1)对应的不重复字符串之内，那么这时候更新 f(i) = d
+
+    - 若d > f(i-1)，则无影响,f(i) = f(i-1) + 1
