@@ -9,14 +9,11 @@ class Solution:
 
         d = {}
         dp = [1]*len(s)
-
+        # 求的是当前子串的长度
         for i in range(1, len(s)):
-            if s[i] not in d:
+            if s[i] not in d or i - d[s[i]] > dp[i - 1]:
                 dp[i] = dp[i-1] + 1
             else:
-                if i - d[s[i]] > dp[i-1]:
-                    dp[i] = dp[i-1] + 1
-                else:
-                    dp[i] = i - d[s[i]]
+                dp[i] = i - d[s[i]]
             d[s[i]] = i
-        return max(dp)
+        return max(dp)  # 数组
