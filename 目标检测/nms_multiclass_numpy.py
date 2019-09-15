@@ -1,7 +1,8 @@
 import numpy as np
 
 def nms(predicts_dict, threshold=0.5):
-	for object_name, bbox in predicts_dict.items():#对每一个类别分别进行NMS；一次读取一对键值（即某个类别的所有框）
+	for object_name, bbox in predicts_dict.items():
+    	#对每一个类别分别进行NMS；一次读取一对键值（即某个类别的所有框）
 		bbox_array = np.array(bbox, dtype=np.float)
 		
 		x1 = bbox_array[:, 0]

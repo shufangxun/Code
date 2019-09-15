@@ -9,7 +9,7 @@ def iou(self, box1, box2):
 		box2[:, :2].unsqueeze(0).expand(N, M, 2),   # [M,2]->[1,M,2]->[N,M,2]
 	)
 
-	rb = torch.min(
+	rb = torch.min( # 右下角的点
 		box1[:, 2:].unsqueeze(1).expand(N, M, 2),
 		box2[:, 2:].unsqueeze(0).expand(N, M, 2),
 	)
