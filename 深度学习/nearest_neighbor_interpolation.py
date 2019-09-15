@@ -1,5 +1,8 @@
 import numpy as np
 def resize(src, dst_h, dst_w):
+    '''
+    邻域插值
+    '''
     src_h, src_w, channels = src.shape
     ratio_h = src_h / dst_h
     ratio_w = src_w / dst_h

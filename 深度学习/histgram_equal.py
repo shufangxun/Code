@@ -2,6 +2,9 @@ import numpy as np
 from PIL import Image
 
 def histgram_equal(img):
+    '''
+    直方图均衡
+    '''
     img = np.asarray(img) # 转化为数组
     # 统计灰度级别
     numpix = np.zeros([256])

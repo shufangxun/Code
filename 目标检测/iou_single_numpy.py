@@ -1,6 +1,4 @@
-
 import numpy as np
-
 def iou(box1, box2):
 	'''
 	box [x1,y1,x2,y2]

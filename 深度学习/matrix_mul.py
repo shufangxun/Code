@@ -1,4 +1,7 @@
 def matrix_multiply(A, B):
+    '''
+    矩阵乘法
+    '''
     m, p = len(A), len(A[0])
     n = len(B[0])
     if p != len(B):
