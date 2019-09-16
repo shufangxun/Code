@@ -30,3 +30,8 @@
     pip install mmcv
     conda install -c cmusselle gcc
    ```
+
+3. 安装mmdetection
+```Shell
+
+```
