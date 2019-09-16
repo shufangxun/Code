@@ -1,4 +1,4 @@
-### 安装 (基于SJTU)
+### **安装 (基于SJTU)**
 1. 创建环境并激活
     ```Shell
     module load anaconda3/2019.07
@@ -31,7 +31,20 @@
     conda install -c cmusselle gcc
    ```
 
-3. 安装mmdetection
-```Shell
+3. 安装编译mmdetection
+    ```Shell
+    # 安装
+    git clone https://github.com/open-mmlab/mmdetection.git
+    cd mmdetection  
+    # 编译
+    python setup.py develop
+    # or "pip install -v -e ."
 
-```
+    ```
+
+
+### **训练**  
+
+**权重加载优先级**  
+resume_from > load_from > pretrained   
+
