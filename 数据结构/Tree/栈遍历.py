@@ -31,7 +31,7 @@ class Node:
             while node:
                 stack.append(node)
                 node = node.left
-            node = stack.pop()  # 等于说访问了两次
+            node = stack.pop()  # 等于访问了两次
             print(node.value)
             node = node.right
 
@@ -51,7 +51,6 @@ class Node:
             stack2.append(node)
         while stack2:                         #将stack2中的元素出栈，即为后序遍历次序
             print(stack2.pop().value)
-
 
 
     def BFS(self, root):
