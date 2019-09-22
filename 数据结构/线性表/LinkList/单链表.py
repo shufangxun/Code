@@ -1,7 +1,7 @@
 
 ## 节点创建类
 class Node:
-    def __init__(self, element=None):
+    def __init__(self, element):
         self.element = element
         self.next = None
 
@@ -19,8 +19,8 @@ class Node:
 class Linklist:
 
     # 初始化：只有头节点 data=None,next=None
-    def __init__(self):
-        self.head = Node()
+    def __init__(self, element):
+        self.head = Node(element)
         self.size = 0
 
 
@@ -40,8 +40,8 @@ class Linklist:
     def add(self, data):
         new_node = Node(data)
 
-        new_node.next = self.head.next
-        self.head.next = new_node
+        new_node.next = self.head
+        self.head = new_node
 
         self.size += 1
 
@@ -115,10 +115,11 @@ class Linklist:
     # 遍历链表并存储在数组
     def traverse(self):
         elems = []
+        p = self.head
 
-        while self.head.next != None:
-            self.head = self.head.next 
-            elems.append(self.head.element)  
+        while p != None: 
+            elems.append(p.element)
+            p = p.next   
         print(elems)
 
     # 反转打印链表
@@ -143,7 +144,7 @@ class Linklist:
     
 
 if __name__ == "__main__":
-    l = Linklist()
+    l = Linklist(10)
     l.append(10)
     l.add(1)
     l.add(2)
