@@ -5,7 +5,7 @@ class Node:
         self.pre = None
 
 '''
-大部分不涉及节点变化的都一样:is_empty, __len__, traverse, search等
+大部分不涉及节点变化的都一样: is_empty, __len__, traverse, search等
 增删节点和定义节点时不同
 '''
 class DLinkList:
