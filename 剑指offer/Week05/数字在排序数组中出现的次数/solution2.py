@@ -13,6 +13,7 @@ class Solution(object):
         leftK = self.getleftK(nums, k, low, high)
         rightK = self.getrightK(nums, k, low, high)
         return rightK - leftK + 1
+    
     def getleftK(self, nums, k, low, high):
         while low <= high: 
             mid = (low + high) // 2
