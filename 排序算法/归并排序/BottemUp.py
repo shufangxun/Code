@@ -34,10 +34,8 @@ class mergeSort:
         sz = 1 # 子数组尺寸
         a = []
         while sz < len(alist):
-            for i in range( 0, len(alist), 2 * sz):
+            for i in range(0, len(alist), 2 * sz):
                a += merge(alist[i:i+sz], alist[i+sz,i+2*sz])
-
-
 
             sz = sz * 2
 
