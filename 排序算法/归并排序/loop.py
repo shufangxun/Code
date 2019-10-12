@@ -17,7 +17,7 @@ def bottomup_mergesort(arr):
     length = len(arr)
     size = 1
     while size < length:
-		size += size # initializes at 2 as described
+		size += size # 2
 		for pos in range(0, length, size):
 			sublist_start = pos
 			sublist_mid   = pos + (size / 2)
