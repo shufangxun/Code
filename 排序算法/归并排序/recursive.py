@@ -24,7 +24,7 @@ def merge(left, right):
             j += 1
     sorted += left[i:]
     sorted += right[j:]
-
+    
     return sorted
 
 
