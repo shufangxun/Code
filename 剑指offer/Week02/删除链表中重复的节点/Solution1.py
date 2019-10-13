@@ -14,9 +14,9 @@ class Solution(object):
         if head is None or head.next is None:
             return head
         
-        H = ListNode(-1)
+        dummy = ListNode(-1)
 
-        pre = H
+        pre = dummy
         pre.next = head
         cur = head
 
@@ -32,7 +32,7 @@ class Solution(object):
                 pre = cur
                 cur = cur.next
         
-        return H.next
+        return dummy.next
 
 
 

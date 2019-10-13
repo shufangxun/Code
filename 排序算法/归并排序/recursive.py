@@ -9,7 +9,7 @@ def mergesort(arr):
     mid = len(arr) // 2
     left = mergesort(arr[:mid])
     right = mergesort(arr[mid:])
-    merged = merge(left, right)
+    merged = merge(left, right)   # 每次merge都要new一个数组空间, 消耗很大
     return merged
 
 def merge(left, right):
