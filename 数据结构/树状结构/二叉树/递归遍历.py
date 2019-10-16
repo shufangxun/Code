@@ -26,6 +26,25 @@ class Node:
         self.postTraverse(root.right)
         print(root.value)
 
+    def levelTraverse(self, root):
+        if not root:
+            return []
+    
+        queue = []
+        res = [] # 保存结果
+    
+        p = root
+        queue.append(p)
+    
+        while queue:
+            temp = queue.pop(0)
+            res.append(temp.value)
+            if temp.left != None:
+                queue.append(temp.left)
+            if temp.right != None:
+                queue.append(temp.right)
+        print(res)
+
 if __name__=='__main__':
     root=Node('D',Node('B',Node('A'),Node('C')),Node('E',right=Node('G',Node('F'))))
     root.preTraverse(root)
@@ -33,3 +52,5 @@ if __name__=='__main__':
     root.midTraverse(root)
     print('\n')
     root.postTraverse(root)
+    print('\n')
+    root.levelTraverse(root)
