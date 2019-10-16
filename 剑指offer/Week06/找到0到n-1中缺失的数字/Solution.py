@@ -7,13 +7,13 @@ class Solution(object):
         start, end = 0, len(nums) - 1
         if end < 0:
             return 0
-        if end == nums[end]:
+        if end == nums[end]:　　# 形如 [0,1,2,3]
             return end + 1
         while start < end:
             mid = (start + end) >> 1
             if nums[mid] == mid:
-                start = mid + 1
+                start = mid + 1  # 缺失的在后半段
             else:
-                end = mid
+                end = mid # 缺失的在前半段
 
         return nums[end] - 1
