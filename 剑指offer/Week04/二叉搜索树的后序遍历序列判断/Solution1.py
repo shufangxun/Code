@@ -18,6 +18,7 @@ class Solution:
             if num > root_val:
                 break
             left_end = i
+            
         for num in sequence[left_end+1:]:
             if num < root_val:
                 return False

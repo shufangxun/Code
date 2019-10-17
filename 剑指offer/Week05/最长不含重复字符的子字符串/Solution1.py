@@ -4,6 +4,7 @@ class Solution:
         :type s: str
         :rtype: int
         """
+        # 滑动窗口法
         i = 0
         maxlen = 0
         dict = {}
