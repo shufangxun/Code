@@ -1,6 +1,6 @@
 class Solution(object):
     def int2bit(self, num):
-        return (bin(((1 << 32) - 1) & i)[2:]).zfill(32)
+        return (bin(((1 << 32) - 1) & num)[2:]).zfill(32)
         
     def bit2int(self, byte):
         return int(byte[1:], 2) - int(byte[0]) * (1 << 31)   
