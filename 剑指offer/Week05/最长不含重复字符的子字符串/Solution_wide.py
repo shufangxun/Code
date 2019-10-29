@@ -15,7 +15,8 @@ def longestSubstringWithoutDuplication(s):
             lookup.remove(s[left])
             left += 1
             curlen -= 1
-        if curlen > maxlen:maxlen = curlen
+        if curlen > maxlen:
+            maxlen = curlen
         lookup.add(s[i])
         a[curlen] = list(lookup) 
         a_list.append(a) 
