@@ -2,20 +2,30 @@ def LCS(s1, s2):
     m = len(s1)
     n = len(s2)
     dp = [[0 for i in range(n+1)] for j in range(m+1)]
-    if len(s1) == 0 or len(s2) == 0:
-        return 0
-    else:
-        for i in range(1, m+1):
-            for j in range(1, n+1):
-                if s1[i-1] == s2[j-1]:
-                    dp[i][j] = dp[i - 1][j - 1] + 1
-                else:
-                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
-    return dp[m][n]
+    for i in range(1, m+1):
+        for j in range(1, n+1):
+            if i == 0 or j == 0: 
+                dp[i][j] = 0
+            elif s1[i-1] == s2[j-1]:
+            	dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+            	dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    
+    return dp
 
+
+def PRINT_LCS(c, x, y, i, j):
+	if i == 0 or j == 0:
+		return
+	if x[i-1] == y[j-1]:
+		PRINT_LCS(c, x, y, i-1, j-1)
+		print(x[i-1])
+	elif c[i-1][j] >= c[i][j-1]:
+		PRINT_LCS(c, x, y, i-1, j)
+	else:
+		PRINT_LCS(c, x, y, i, j-1)
 
 def PrintLCS(X, Y, m, n):
-    
 	L = [[0 for x in range(n+1)] for x in range(m+1)] 
 	for i in range(m+1): 
 		for j in range(n+1): 
@@ -57,9 +67,10 @@ def PrintLCS(X, Y, m, n):
 	print("".join(lcs))
 
 if __name__ == "__main__":
-    s1 = "abcbdab"
-    s2 = "bdcaba"
+    s1 = "abcg"
+    s2 = "bdcg"
     m = len(s1) 
-    n = len(s2) 
+    n = len(s2)
+    dp = LCS(s1,s2) 
     PrintLCS(s1, s2, m, n) 
-    print(LCS(s1,s2))
+    PRINT_LCS(dp, s1, s2, m, n)
