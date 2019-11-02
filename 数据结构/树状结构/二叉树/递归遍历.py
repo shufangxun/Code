@@ -29,13 +29,10 @@ class Node:
     def levelTraverse(self, root):
         if not root:
             return []
-    
         queue = []
         res = [] # 保存结果
-    
         p = root
         queue.append(p)
-    
         while queue:
             temp = queue.pop(0)
             res.append(temp.value)
