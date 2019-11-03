@@ -55,7 +55,6 @@ def LIS2(nums):
                 else:
                     r = mid
             queue[l] = nums[i]  # 关键替换
-    
     return len(queue)
 
 # 打印长度和序列值
