@@ -27,7 +27,7 @@ def shiftup1(heap, i):
 下沉操作
 '''
 def shiftdown(heap, i):
-    # small_child = -1
+    small_child = -1
     while 2 * i <= len(heap) - 1:
         l = 2 * i + 1
         r = 2 * i + 2
@@ -70,7 +70,6 @@ def heapsort(arr):
         arr[0], arr[len(arr)-1] = arr[len(arr)-1], arr[0]
         arr.pop()
         shiftdown(arr, 0)
-    ans.append(arr[0])
     return ans
 
 if __name__ == "__main__":
