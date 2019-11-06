@@ -3,6 +3,7 @@
 ## 前序遍历
 
 ## 中序遍历
+
 > 给定一棵二叉树，写出中序遍历数组
 
 解法1：递归，用__init__(self)构造一个全局变量
@@ -38,15 +39,13 @@ class Solution:
         '''
 ```
 
-解法3： 用栈存储遍历，遍历到最左边，再迭代弹出
+解法3： 用栈存储遍历，遍历到最左边后，再迭代弹出
 
 ```python
 class Solution:
    def inorderTraversal(self, root: TreeNode) -> List[int]:
-        ans = []
-        stack = []
-        if root is None:
-            return []
+        ans, stack = [], []
+        if root is None: return []
         while stack or root:
             if root:
                 stack.append(root)
@@ -59,6 +58,39 @@ class Solution:
 ```
 
 ## 后序遍历
+
+>给定一个二叉树，返回它的 后序 遍历
+
+解法1：递归
+
+```python
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        if root is None:
+            return []
+        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val]
+```
+
+解法2：迭代
+
+- 先写出后序遍历的数组
+- 然后分析如何利用栈弹出，可知从右边往左弹
+- 构建两个栈来维护
+
+```python
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        if root is None: return []
+        stack1 = [root]
+        stack2 = []
+        while stack1:
+            tmp = stack1.pop()
+            stack2.append(tmp.val)
+            if tmp.left: stack1.append(tmp.left)
+            if tmp.right: stack1.append(tmp.right)
+        return stack2[::-1]
+
+```
 
 ## 二叉树的下一个节点
 
