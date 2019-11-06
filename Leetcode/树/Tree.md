@@ -1,7 +1,43 @@
 # 二叉树
 
 ## 前序遍历
+> 给定一个二叉树，写出前序遍历数组
 
+解法1：递归
+
+```python
+class Solution:
+    def preTraversal(self, root: TreeNode) -> List[int]:
+        if root is None:
+            return []
+        return [root.val] + self.preTraversal(root.left) + self.preTraversal(root.right)
+```
+
+解法2：迭代
+
+- 遍历先保存当前结点
+- 右边先入栈，左边后入栈
+
+```python
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        if root is None: return []
+        stack = [root]
+        ans = []
+        while stack:
+            tmp = stack.pop()
+            ans.append(tmp.val)
+            if tmp.right:
+                stack.append(tmp.right)
+            if tmp.left:
+                stack.append(tmp.left)
+        return ans
+```
+- 一边遍历，一边存储
+
+```python
+
+```
 ## 中序遍历
 
 > 给定一棵二叉树，写出中序遍历数组
@@ -28,15 +64,7 @@ class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
         if root is None:
             return []
-        ans += self.inorderTraversal(root.left)
-        ans.append(root.val)
-        ans += self.inorderTraversal(root.rights)
-        return ans
-        '''
-        if root is None:
-            return []
         return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
-        '''
 ```
 
 解法3： 用栈存储遍历，遍历到最左边后，再迭代弹出
