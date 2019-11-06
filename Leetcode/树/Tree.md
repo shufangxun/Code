@@ -3,6 +3,60 @@
 ## 前序遍历
 
 ## 中序遍历
+> 给定一棵二叉树，写出中序遍历数组
+
+解法1：递归，用__init__(self)构造一个全局变量
+
+```python
+class Solution:
+    def __init__(self):
+        self.ans = []
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        if root is None:
+            return
+        self.inorderTraversal(root.left)
+        self.ans.append(root.val)
+        self.inorderTraversal(root.right)
+        return self.ans
+```
+
+解法2：递归，避免定义__init__函数
+
+```python
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        if root is None:
+            return []
+        ans += self.inorderTraversal(root.left)
+        ans.append(root.val)
+        ans += self.inorderTraversal(root.rights)
+        return ans
+        '''
+        if root is None:
+            return []
+        return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
+        '''
+```
+
+解法3： 用栈存储遍历，遍历到最左边，再迭代弹出
+
+```python
+class Solution:
+   def inorderTraversal(self, root: TreeNode) -> List[int]:
+        ans = []
+        stack = []
+        if root is None:
+            return []
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                tmp = stack.pop()
+                ans.append(tmp.val)
+                root = tmp.right
+        return ans
+```
 
 ## 后序遍历
 
@@ -158,7 +212,23 @@ class Solution(object):
             return None
         root.left, root.right = root.right, root.left
         self.mirror(root.left)
-        self.mirror(root,right)
+        self.mirror(root.right)
+```
+
+## 二叉树的最大深度
+
+> 给定一个二叉树，求最大深度
+
+解法：递归求左右子树的最大深度
+
+```python
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        l = self.maxDepth(root.left)
+        r = self.maxDepth(root.right)
+        return max(l, r) + 1
 ```
 
 ## 平衡二叉树
