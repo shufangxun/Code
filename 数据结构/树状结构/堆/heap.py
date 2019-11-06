@@ -48,7 +48,7 @@ def shiftdown1(heap, i):
         small_child = l
     if r <= len(heap) - 1 and heap[r] < heap[l]: # 右孩子未越界
         small_child = r
-    if heap[i] < heap[small_child]:
+    if heap[i] > heap[small_child]:
         heap[i], heap[small_child] = heap[small_child], heap[i]
         shiftdown(heap, small_child)
 
