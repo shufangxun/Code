@@ -13,7 +13,7 @@ def preorderTraversal1(root):
         return ans
 
 # 递归
-def preTraversa2(root):
+def preTraversal2(root):
         if root is None:
             return []
         return [root.val] + preTraversal(root.left) + preTraversal(root.right)

@@ -1,3 +1,4 @@
+# 递归
 def inorderTraversal( root):
     if root is None:
         return []
@@ -26,16 +27,4 @@ def inorderTraversal(root):
             ans.append(tmp.val)
             root = tmp.right
     return ans
-
-# 递归
-class Solution1:
-    def __init__(self):
-        self.ans = []
-    def inorderTraversal(self, root: TreeNode) -> List[int]:
-        if root is None:
-            return
-        self.inorderTraversal(root.left)
-        self.ans.append(root.val)
-        self.inorderTraversal(root.right)
-        return self.ans
 
