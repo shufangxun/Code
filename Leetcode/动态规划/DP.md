@@ -205,9 +205,33 @@ def minPathSum(grid):
    ```
 
 - 状态  
-$dp[i][j]$ 是 $S$ 中前 $i$ 个字符包含 $T$ 中前 $j$ 个字符的数目
+$dp[i][j]$ 是 $T$ 中前 $i$ 个字符在 $S$ 中前 $j$ 个字符的数目
 - 状态转移方程  
-   当S[i] == T[j]  
-   1. $S[i]$ 与 $T[j]$ 不做匹配：$dp[i-1][j]$
-      2. $S[i]$ 与 $T[j]$ 做匹配：$dp[i-1][j-1]$  
+   当 $T[i] == S[j]$  
+   1. $T[i]$ 与 $S[j]$ 不做匹配：$dp[i][j-1]$  
+   2. $T[i]$ 与 $S[j]$ 做匹配：$dp[i-1][j-1]$  
+
+   当 $T[i] \neq S[j]$
+   1. $S[i]$ 不起作用：$dp[i][j-1]$
+- 边界条件  
+  1. 当 $T$ 为空，一直包含，$dp[0][j]=1$
+  2. 初始化 $dp$ 要 $+1$
+
+```python
+def numDistinct(s, t):
+    # n行m列
+    # n是t，ｍ是s
+    m, n = len(s) + 1, len(t) + 1
+    dp = [[0] * m for _ in range(n)]
+    for j in range(m):
+        dp[0][j] = 1
+    # 状态方程
+    for i in range(1, n):
+        for j in range(1, m):
+            if t[i-1] == s[j-1]:
+                dp[i][j] = dp[i - 1][j - 1] + dp[i][j - 1]
+            else:
+                dp[i][j] = dp[i][j - 1]
+    return dp[n-1][m-1]
+```
 
