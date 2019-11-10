@@ -84,7 +84,7 @@ class Solution:
 
 ## 后序遍历
 
->给定一个二叉树，返回它的 后序 遍历
+>给定一个二叉树，返回它的后序遍历
 
 解法1：递归
 
@@ -228,7 +228,6 @@ class Solution(object):
 ## 对称二叉树
 
 >给定一个二叉树，检查它是否是镜像对称的.  
-例如，二叉树 [1,2,2,3,4,4,3] 是对称的.
 
 解法：递归  
 基：当根结点为空时，返回True；当左右子树为空时：1) 左空右不空(或者右空左不空，返回False)；2) 左右都空，返回True  
@@ -254,6 +253,7 @@ class Solution(object):
 ```
 
 ## 镜像二叉树
+
 >输入一个树，讲其变为自身镜像
 
 解法：前序遍历，变换左右结点，交换完之后**下面子树**连带交换
@@ -288,6 +288,26 @@ class Solution:
         return max(l, r) + 1
 ```
 
+## 二叉树的最小深度
+
+> 1、给定一个二叉树，找出其最小深度。  
+> 2、最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
+
+解法：递归，注意叶子节点的定义
+
+- 叶子节点是没有左右孩子的节点
+
+```python
+def minDepth(root):
+    if root is None:
+        return 0
+    l = minDepth(root.left)
+    r = minDepth(root.right)
+    if root.left is None or root.right is None:
+        return l + r + 1
+    return min(l, r) + 1
+```
+
 ## 平衡二叉树
 
 > 如果某二叉树中任意结点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
@@ -316,3 +336,29 @@ class Solution(object):
         r = self.height(root.right)
         return max(l, r) + 1
 ```
+
+## 合并二叉树
+
+> 合并两个二叉树，重合结点对应值相加，不重合直接作为新树结点
+
+解法：递归
+
+- 递归判断对应左右结点是否存在
+- 存在则相加
+- 不存在返回另一边
+  
+```python
+def mergeTrees(t1, t2):
+    if t1 is None:
+        return t2
+    if t2 is None:
+        return t1
+    if not t1 and not t2:
+        return None
+    if t1 and t2:
+        t1.val += t2.val
+        t1.left = mergeTrees(t1.left, t2.left)
+        t1.right = mergeTrees(t1.right, t2.right)
+        return t1
+```
+
