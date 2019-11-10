@@ -4,7 +4,7 @@
 
 > 将输入的字符串反转过来，并且是$O(1)$空间解决这一问题。
 
-解法：双指针法
+解法1：双指针法
 
 ```python
 def reverseString(s):
@@ -13,6 +13,28 @@ def reverseString(s):
     l, r = 0, len(s) - 1
     while l < r:
         s[l], s[r] = s[r], s[l]
+        l += 1
+        r -= 1
+    return s
+```
+
+解法2：三次异或法
+
+```python
+'''
+交换a,b:
+a = a ^ b
+b = b ^ a
+a = a ^ b
+'''
+def reverseString(s):
+    if len(s) <= 1:
+        return s
+    l, r = 0, len(s) - 1
+    while l < r:
+        s[l] ^= s[r]
+        s[r] ^= s[l]
+        s[l] ^= s[r]
         l += 1
         r -= 1
     return s
