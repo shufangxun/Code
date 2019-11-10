@@ -24,6 +24,9 @@ def reverseString(s):
 > 输入: str="abcdefg", offset =2  
 > 输出: str = "cdefgab"  
 
+- 空间复杂度：$O(1)$
+- 时间复杂度：$O(n)$
+
 ```python
 def rotateString(s, offset):
     if not s:
