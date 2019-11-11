@@ -235,3 +235,34 @@ def numDistinct(s, t):
     return dp[n-1][m-1]
 ```
 
+## 判断子序列
+
+> 给定字符串 s 和 t ，判断 s 是否为 t 的子序列
+
+- 状态
+$dp[i][j]$：以第$i$个元素结尾的$S$序列包含以$j$结尾的$T$元素
+
+- 状态转移
+  1. 当$S[i]==T[j]$，等价于判断$S[i-1]$是否包含$T[j-1]$
+  2. 当$S[i] \neq T[j]$，等价于判断$S[i-1]$是否包含$T[j]$
+
+- 初始化都为True
+
+```python
+def isSubsequence(s, t):
+    m = len(s) + 1
+    n = len(t) + 1
+    dp = [[True] * n for _ in range(m)]
+
+    for i in range(1, m):
+        dp[i][0] = False
+
+    for i in range(1, m):
+        for j in range(1, n):
+            if s[i-1] == t[j-1]:
+                dp[i][j] = dp[i-1][j-1]
+            else:
+                dp[i][j] = dp[i][j-1]
+
+    return dp[m-1][n-1]
+```
