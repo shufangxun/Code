@@ -30,3 +30,7 @@ class Solution:
         else:
             return self.findKthLargest(less_part,k-len(great_part)-1)
 ```
+
+## 幂次
+
+见数学部分
