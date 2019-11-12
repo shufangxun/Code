@@ -266,3 +266,7 @@ def isSubsequence(s, t):
 
     return dp[m-1][n-1]
 ```
+
+## 最长回文子串
+
+> 给定一个字符串 s，找到 s 中最长的回文子串。
