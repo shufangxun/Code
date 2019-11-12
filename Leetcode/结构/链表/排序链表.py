@@ -3,8 +3,7 @@ class ListNode:
     def __init__(self, x):
         self.val = x
         self.next = None
-'''
-'''
+ 
 def sortList1(head):
     if not head or not head.next: return head
     # 找到中点
