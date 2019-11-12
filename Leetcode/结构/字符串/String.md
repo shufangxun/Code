@@ -40,11 +40,11 @@ def reverseString(s):
     return s
 ```
 
-## 循环移动字符串
+## 旋转字符串
 
-> 给定一个字符串和一个偏移量，根据偏移量原地移动字符串，空间复杂度 $O(1)$  
-> 输入: str="abcdefg", offset =2  
-> 输出: str = "cdefgab"  
+> 给定一个字符串和一个偏移量，根据偏移量原地移动字符串，空间复杂度 $O(1)$
+> 输入: str="abcdefg", offset =2
+> 输出: str = "cdefgab"
 
 - 空间复杂度：$O(1)$
 - 时间复杂度：$O(n)$
