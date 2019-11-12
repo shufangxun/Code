@@ -10,12 +10,10 @@ class Solution:
         :type head: ListNode
         :rtype: ListNode
         """
-        pre = None
-        cur = head
+        pre, cur = None, head
         while cur:
-            nex = cur.next
+            tmp = cur.next
             cur.next = pre
             pre = cur
-            cur = nex
-        
+            cur = tmp
         return pre  # cur已经到链表尾部，是None 

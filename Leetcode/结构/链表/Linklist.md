@@ -118,3 +118,7 @@ def mergeTwoLists(l1, l2):
     p.next = l1 if l1 else l2
     return dummyhead.next
 ```
+
+## 反转链表
+
+见剑指offer-week03
