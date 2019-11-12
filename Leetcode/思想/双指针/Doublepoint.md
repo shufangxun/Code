@@ -18,14 +18,29 @@ def merge(nums1, m, nums2, n):
         if i == -1:
             nums1[k] = nums2[j]
             j -= 1
-
         elif j == -1:
             break
         elif nums1[i] < nums2[j]:
             nums1[k] = nums2[j]
             j -= 1
         else:
-            nums1[k] = nums1[i] 
+            nums1[k] = nums1[i]
             i -= 1
 
+```
+
+## 判断子序列
+
+> 给定字符串 s 和 t ，判断 s 是否为 t 的子序列
+
+```python
+def isSubsequence1(s, t):
+    i, j = 0, 0
+    while i < len(s) and j < len(t):
+        if s[i] == t[j]:
+            i += 1
+            j += 1
+        else:
+            j += 1
+    return False if i < len(s) else True
 ```
