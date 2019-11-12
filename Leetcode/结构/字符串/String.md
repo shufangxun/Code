@@ -53,7 +53,7 @@ def reverseString(s):
 def rotateString(s, offset):
     if not s:
         return s
-    offset = offset % len(s)
+    offset = offset % len(s) # 细节
     reverse(s, 0, offset - 1)
     reverse(s, offset, len(s) - 1)
     reverse(s, 0, len(s) - 1)
