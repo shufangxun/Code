@@ -1,7 +1,9 @@
+'''
 class ListNode:
     def __init__(self, x):
         self.val = x
         self.next = None
+'''
 '''
 def sortList1(head):
         if not head or not head.next: return head 
@@ -34,31 +36,20 @@ class Solution:
         while p:
             length += 1
             p = p.next
-            
+
         size = 1
         while size < length:
             cur = dummyhead.next
             tail = dummyhead
             while cur:
                 left = cur
-                right = self.cut(left, size)
-                cur = self.cut(right, size)
+                right = self.split(left, size)
+                cur = self.split(right, size)
                 tail.next = self.merge(left, right)
                 while tail.next:
                     tail = tail.next
             size += size
         return dummyhead.next
-
-    def cut(self, head, n):
-        p = head
-        while p and n-1:
-            p = p.next
-            n -= 1
-        # 返回剩余节点
-        if p is None: return None
-        res = p.next
-        p.next = None
-        return res
 
     def merge(self, left, right):
         p = res = ListNode(0)
@@ -72,3 +63,13 @@ class Solution:
             p = p.next
         p.next = left if left else right
         return res.next
+
+    def split(self, head, n):
+        while head and n-1:
+            head = head.next 
+            n -= 1
+        # 返回剩余节点
+        if head is None: return None
+        res = head.next
+        head.next = None
+        return res
