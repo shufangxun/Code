@@ -272,3 +272,54 @@ def isSubsequence(s, t):
 > 给定一个字符串 s，找到 s 中最长的回文子串
 
 to do
+
+## 最大正方形
+
+> 在一个由 0 和 1 组成的二维矩阵内，找到只包含 1 的最大正方形，并返回其面积
+
+- 状态  
+$dp[i][j]$ 是以其为右下角的正方形最大边
+- 状态方程  
+  $dp[i][j]$ 是左边$dp[i-1][j]$，上边$dp[i][j-1]$和斜上$dp[i-1][j-1]$的最大边 $+1$
+- 边界方程  
+  1. 当为空时，返回０
+  2. 当$matrix[i][j]=0$，$dp[i][j]=0$
+  3. 当为第一行和第一列时，$dp[i][j]=matrix[i][j]-0
+- 时间复杂度；$O(mn)$  
+- 空间复杂度：$O(mn)$
+
+```python
+def maximalSquare(matrix):
+   if not matrix: return 0
+   m, n = len(matrix), len(matrix[0]) # m为行数 n为列数
+   dp = [[0] * n for _ in range(m)]
+   size = 0 # 边长
+   for i in range(0, m):
+      for j in range(0, n):
+            if matrix[i][j] == '0' or i == 0 or j == 0:
+               dp[i][j] = int(matrix[i][j]) - 0
+            else:
+               dp[i][j] = int(min(dp[i - 1][j - 1], min(dp[i - 1][j], dp[i][j - 1]))) + 1
+            size = max(dp[i][j], size)
+   return size * size
+```
+
+- 优化
+
+```python
+def maximalSquare(self, matrix):
+   if not matrix: return 0
+   m, n = len(matrix), len(matrix[0]) # m为行数 n为列数
+   dp = [0] * n
+   size = 0 # 边长
+   pre = 0
+   for i in range(0, m):
+      for j in range(0, n):
+            tmp = dp[j]
+            if matrix[i][j] == '0' or i == 0 or j == 0:
+               dp[j] = int(matrix[i][j]) - 0
+            else:
+               dp[j] = int(min(dp[j], dp[j - 1], pre)) + 1
+            size = max(dp[j], size)
+   return size * size
+```
