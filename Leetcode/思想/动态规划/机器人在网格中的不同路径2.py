@@ -19,5 +19,5 @@ class Solution(object):
         # 状态方程
         for i in range(1, m):
             for j in range(1, n):
-                dp[i][j] = (dp[i][j-1]+dp[i-1][j]) * (1 - obstacleGrid[i][j])
+                dp[i][j] = (dp[i][j - 1]+dp[i - 1][j]) * (1 - obstacleGrid[i][j])
         return dp[-1][-1]
