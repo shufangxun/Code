@@ -319,7 +319,7 @@ def maximalSquare(self, matrix):
             if matrix[i][j] == '0' or i == 0 or j == 0:
                dp[j] = int(matrix[i][j]) - 0
             else:
-               dp[j] = int(min(dp[j], dp[j - 1], pre)) + 1
+               dp[j] = int(min(dp[j], dp[j - 1], pre)) + 1 # 优化 O(n)
             size = max(dp[j], size)
    return size * size
 ```
