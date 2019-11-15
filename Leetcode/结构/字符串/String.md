@@ -64,3 +64,25 @@ def reverse(s, start, end):
         start += 1
         end -= 1
 ```
+
+## 最后一个单词长度
+
+> 给定一个仅包含大小写字母和空格 ' ' 的字符串，返回其最后一个单词的长度。如果不存在最后一个单词，请返回 0 。
+
+- 去掉空格再计数
+- 时间复杂度：$O(n)$
+
+```python
+def lengthOfLastWord(self, s):
+    # num是长度
+    num = 0
+    end = len(s) - 1
+    # 去掉空格
+    while end >= 0 and s[end] == ' ':
+        end -= 1
+    # 再计数
+    while end >= 0 and s[end] != ' ':
+        num += 1
+        end -= 1
+    return num
+```
