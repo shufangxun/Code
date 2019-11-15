@@ -34,3 +34,30 @@ def maxSlidingWindow(self, nums, k):
             res.append(nums[window[0]])
     return res
 ```
+
+## 无重复的最长子串
+
+> 给定一个字符串，请你找出其中不含有重复字符的最长子串的长度
+
+- 滑动窗口法
+- 模拟一个滑动窗口，窗口内是无重复的字符，要尽可能的扩展窗口长度
+  - 用一个left变量来指向滑动窗口的左边界，如果遍历到的字符没有出现过，扩大右边界
+  - 如果出现过，分两种情况讨论：
+    - 当前字符出现在滑动窗口内，把已在滑动窗口内的字符去掉，然后加进来，去掉的方法是通过移动left指针，因为之前的哈希表保存了该字符最后出现的位置，所以只要移动left指针
+    - 当前字符没有在滑动窗口内，可以直接加到滑动窗口内。
+  - 只维护一个res结果，每次用出现的窗口大小和res本身比较，就可以得到最终结果。
+
+```python
+def lengthOfLongestSubstring(s):
+    left = -1
+    ans = 0
+    # 字符转ASCII ord(s)
+    lookup = [-1] * 128
+    for i, item in range(s):
+        # 出现在滑动窗口内
+        if lookup[ord(s[i])] > left:
+            left = lookup[ord(s[i])]
+        # 当前字符是无重复的 or 未出现在滑动窗口内
+        ans = max(ans, i - left)
+        lookup[ord(s[i])] = i
+```
