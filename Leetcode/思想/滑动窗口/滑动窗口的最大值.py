@@ -9,11 +9,13 @@ class Solution(object):
             return []
         window, res = [], []
         for i, num in enumerate(nums):
-            if i >= k and window[0] <= i - k:
-                window.pop(0)
-            while window and num >= nums[window[-1]]:
+            # 在尾部添加元素，并保证左边元素都比尾部大
+            while window and nums[window[-1]] < num:
                 window.pop(-1)
             window.append(i)
+            # 当长度大于k时,弹出队首元素
+            if window[0] == i - k:
+                window.pop(0)
             if i >= k - 1:
                 res.append(nums[window[0]])
         return res
