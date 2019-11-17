@@ -7,7 +7,7 @@ class Solution(object):
         left = -1
         ans = 0
         lookup = [-1] * 128
-        for i, item in enumerate(s):
+        for i in range(len(s)):
             if lookup[ord(s[i])] > left:
                 left = lookup[ord(s[i])]
             ans = max(ans, i - left)
