@@ -61,3 +61,65 @@ def lengthOfLongestSubstring(s):
         ans = max(ans, i - left)
         lookup[ord(s[i])] = i
 ```
+
+## 最小覆盖子串
+
+> Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
+
+示例
+
+```python
+输入: S = "ADOBECODEBANC", T = "ABC"
+输出: "BANC"
+```
+
+思路；滑动窗口＋哈希表
+
+1. 初始化左右指针$(lef=right=0)$，闭区间$[left, right]$是窗口范围
+2. 移动右指针，直到窗口内字符串包含 T 的所有字符
+3. 移动左指针，找到符合条件的最小窗口，更新最小窗口长度
+   1. 当不包含所有字符串时，重复２操作
+4. 重复上面两步直到右指针到终点
+
+总结；移动右指针找到可行解，移动左指针找到最优解
+
+重点：用**哈希表**作计数器判断窗口包含所有T的所有字符
+
+- 哈希表 valid 记录 T 中包含的字符及出现次数
+- counter 统计 T 的长度
+  - 当 counter == 0 时，说明窗口包含了所有 T 字符
+
+时间复杂度：$O(len(s) + len(t))$  
+空间复杂度：$O(len(t)$
+
+```python
+def minWindow(self, s: str, t: str) -> str:
+    valid = [0] * 128
+    counter = len(t) # 子串是否符合条件
+    left, right = 0, 0
+    minlen = len(s) # 最小长度最坏情况下是 len(s)
+    res = "" # 子串
+    # 初始化 valid
+    for i in range(len(t)):
+        valid[ord(t[i])] += 1
+    # 找到可行解
+    while right < len(s):
+        # 当包含 t 字符时 counter - 1
+        if valid[ord(s[right])] > 0:
+            counter -= 1
+        # 包含的减1，不包含的变为负
+        valid[ord(s[right])] -= 1
+        # 当窗口包含所有 T 字符
+        while counter == 0:
+            # 恢复计数，因为之前做了减1操作
+            valid[ord(s[left])] += 1
+            # 当移动左指针会让窗口不符合条件时
+            if valid[ord(s[left])] > 0:
+                counter += 1
+                if right - left + 1 <= minlen:
+                    minlen, res = right - left + 1, s[left:right+1]
+            left += 1
+        # 不管是否找到，都移动右指针
+        right += 1
+    return res
+```
