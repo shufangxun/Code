@@ -123,3 +123,36 @@ def minWindow(self, s: str, t: str) -> str:
         right += 1
     return res
 ```
+
+## 至多包含两个不同字符的最长子串
+
+> 给定一个字符串 s ，找出至多包含两个不同字符的最长子串 t
+
+- 当窗口包含的字符不超过 2 个不同的字符时，就不断将右指针往右边移动
+- 如何判断窗口里只有两个字符
+
+  - 键值为0时，计数+1；键值不为0时，计数不变；
+  - counter大于2时，若键值为1，counter减1
+
+```python
+def lengthOfLongestSubstringTwoDistinct(s):
+    lookup = [0] * 128
+    left, right = 0, 0
+    maxlen = 0
+    counter = 0
+    while right < len(s):
+        # 没有出现过，即是新字符
+        if lookup[ord(s[right])] == 0:
+            counter += 1
+        lookup[ord(s[right])] += 1
+        right += 1
+        # 重复字符数目大于2个
+        while counter > 2:
+            # 只出现一次的字符
+            if lookup[ord(s[left])] == 1:
+                counter -= 1
+            lookup[ord(s[left])] -= 1
+            left += 1
+        maxlen = max(maxlen, right - left)
+    return maxlen
+```
