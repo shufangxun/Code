@@ -1,10 +1,11 @@
+# 法1
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         if len(s) < 2:
             return s
         # 初始化为False
         dp = [[False for _ in range(len(s))] for _ in range(len(s))]
-        maxlen, res = 1, s[0]
+        maxlen, res = 1, s[0]   
         for right in range(1, len(s)):
             for left in range(right):
                 # 包含长度为1和2的情况 关键所在
@@ -15,6 +16,7 @@ class Solution:
                         maxlen = curlen
                         res = s[left : right + 1]
         return res
+
 
 
 
