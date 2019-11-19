@@ -1,5 +1,5 @@
 # 法1
-class Solution:
+class Solution1:
     def longestPalindrome(self, s: str) -> str:
         if len(s) < 2:
             return s
@@ -17,6 +17,50 @@ class Solution:
                         res = s[left : right + 1]
         return res
 
+# 法2
+class Solution2:
+    def longestPalindrome(self, s: str) -> str:
+        if len(s) < 2:
+            return s
+        maxlen, res = 1, s[0]   
+        
+        for i in range(len(s)):
+            odd, lenodd = self.spreadCenter(s, i, i)
+            even, leneven = self.spreadCenter(s, i, i + 1)
+            curS = odd if lenodd >= leneven else even
+            if len(curS) > maxlen:
+                maxlen = len(curS)
+                res = curS 
+        return res
+    def spreadCenter(self, s, i, j):
+        left, right = i, j
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return s[left + 1 : right], right - left - 1
 
+# 法2变形
+class Solution3:
+    def longestPalindrome(self, s: str) -> str:
+        if len(s) < 2:
+            return s
+        
+        left, right = 0, 0  
+        for i in range(len(s)):
+            lenodd = self.spreadCenter(s, i, i)
+            leneven = self.spreadCenter(s, i, i + 1)
+            length = max(lenodd, leneven)
 
+            if length > right - left:
+                left = i - (length - 1) // 2
+                right = i + length // 2
+        return s[left: right + 1]
 
+    def spreadCenter(self, s, i, j):
+        left, right = i, j
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return right - left - 1
+
+# 法4 马拉车

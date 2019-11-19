@@ -267,7 +267,7 @@ def isSubsequence(s, t):
     return dp[m-1][n-1]
 ```
 
-## 最长回文子串
+## 最长回文子串 [参考](https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/)  
 
 > 给定一个字符串 s，找到 s 中最长的回文子串
 
@@ -301,6 +301,70 @@ $dp[i][j]$；二维布尔数组，当字符串 $s[i:j]$ 是回文串，则为 Tr
       ```python
       dp[l][r] = (s[l] == s[r] and (r - l <= 2 or dp[l + 1][r - 1]))
       ```
+
+```python
+def longestPalindrome(s):
+   if len(s) < 2:
+      return s
+   # 初始化为False
+   dp = [[False for _ in range(len(s))] for _ in range(len(s))]
+   # 偷懒：若是回文子串长度为1，返回第一个字符就行
+   maxlen, res = 1, s[0]
+   for right in range(1, len(s)):
+      for left in range(right):
+            # 包含长度为1和2的情况 关键所在
+            # 在左右边界字符相等的前提下，如果收缩后不构成区间（最多只有 1 个元素），直接返回 True
+            if s[left] == s[right] and (right - left <= 2 or dp[left + 1][right - 1]):
+               dp[left][right] = True
+               curlen = right - left + 1
+               if curlen > maxlen:
+                  maxlen = curlen
+                  res = s[left : right + 1]
+   return res
+```
+
+法2. 中心扩散 优化空间
+
+- 时间复杂度：$O(N^{2})$  
+  **枚举中心**时间复杂度为 $O(N)$，从中心扩散得到回文子串的时间复杂度为 $O(N)$，因此时间复杂度可以降到 $O(N^{2})$
+- 空间复杂度：$O(1)$  
+  只使用到常数个临时变量，与字符串长度无关
+
+思路：遍历每一个索引，以这个索引为中心，利用回文串**中心对称**的特点，往两边扩散，看最多能**扩散多远**
+
+- 中心点选取  
+回文串在长度为奇数和偶数的时候，回文中心不一样：
+   1. 奇数回文串的中心是一个**具体的字符**
+   2. 偶数回文串的中心是位于中间的**两个字符的空隙**  
+
+   每次循环选择一个中心，进行左右扩展，判断左右字符是否相等，共有 $n + n - 1$ 个回文串中心
+
+- 扩散
+  1. 如果传入重合的索引，得到的回文子串的长度是奇数；  
+  2. 如果传入相邻的索引，得到的回文子串的长度是偶数
+
+```python
+class Solution2:
+    def longestPalindrome(self, s: str) -> str:
+        if len(s) < 2:
+            return s
+        maxlen, res = 1, s[0]
+        for i in range(len(s)):
+            odd, lenodd = self.spreadCenter(s, i, i)
+            even, leneven = self.spreadCenter(s, i, i + 1)
+            curS = odd if lenodd >= leneven else even
+            if len(curS) > maxlen:
+                maxlen = len(curS)
+                res = curS
+        return res
+    def spreadCenter(self, s, i, j):
+        left, right = i, j
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return s[left + 1 : right], right - left - 1
+```
+
 
 ## 最大正方形
 
