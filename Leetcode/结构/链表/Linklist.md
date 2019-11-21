@@ -121,3 +121,46 @@ def mergeTwoLists(l1, l2):
 ## 反转链表
 
 见剑指offer-week03
+
+## 两数相加
+
+> 给出两个**非空**的链表用来表示两个非负的整数。其中，它们各自的位数是按照逆序的方式存储的，并且它们的每个节点只能存储**一位**数字
+
+```python
+输入：(7 -> 8 ) + (6 -> 4)
+输出：3 -> 3 -> 1
+原因：87 + 46 = 133
+```
+
+解法：进位和增加位数，考虑三点：
+
+- 两数不一样长
+- 有进位
+- 最后有进位
+  
+```python
+def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        dummy = ListNode(-1)
+        cur = dummy # 这一步必须的，为了能从dummy返回整个链表，所以以cur替代dummy迭代
+        C = 0
+        # 补0
+        while l1 or l2:
+            if l1 and l2:
+                S = l1.val + l2.val + C
+                l1, l2 = l1.next, l2.next
+            elif l1 is None:
+                S = l2.val + 0 + C
+                l2 = l2.next
+            else:
+                S = l1.val + 0 + C
+                l1 = l1.next
+            # 求进位和当前和
+            C = S // 10
+            cur.next = ListNode(S % 10)
+            # 移动到下一个结点
+            cur = cur.next
+        # 最后可能有进位
+        if C == 1:
+            cur.next = ListNode(1)
+        return dummy.next
+```
