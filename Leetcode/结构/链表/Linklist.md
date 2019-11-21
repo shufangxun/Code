@@ -137,7 +137,8 @@ def mergeTwoLists(l1, l2):
 - 两数不一样长
 - 有进位
 - 最后有进位
-  
+- 拓展：正向，那就用栈压入再弹出
+
 ```python
 def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         dummy = ListNode(-1)
