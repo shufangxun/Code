@@ -40,6 +40,22 @@ def reverseString(s):
     return s
 ```
 
+## 反转字符串 I I
+
+> 给定一个字符串和一个整数 k，从字符串开头算起的每个 2k 个字符的前 k 个字符进行反转。如果剩余少于 k 个字符，则将剩余的所有全部反转。如果有小于 2k 但大于或等于 k 个字符，则反转前 k 个字符，并将剩余的字符保持原样。
+
+解法：反转k个 跳过k个 最后剩余的不够k个,全部反转
+
+```python
+def reverseStr(s, k):
+    left, mid, right = 0, k, 2 * k                  # 初始化左中右指针
+    res = ''                                        # 初始化结果字符串
+    while len(res) < len(s):                        # 满足条件时执行
+        res += s[left:mid][::-1] + s[mid:right]     # 把当前单元的结果添加到结果字符串
+        left, mid, right = left + 2 * k, mid + 2 * k, right + 2 * k
+    return res
+```
+
 ## 旋转字符串
 
 > 给定一个字符串和一个偏移量，根据偏移量原地移动字符串，空间复杂度 $O(1)$
