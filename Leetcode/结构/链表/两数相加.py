@@ -24,7 +24,7 @@ class Solution:
             C = S // 10
             cur.next = ListNode(S % 10)
             cur = cur.next
-        
+        # 有额外的进位时的处理方式
         if C == 1:
             cur.next = ListNode(C)
 
