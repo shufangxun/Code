@@ -1,4 +1,4 @@
-'''
+# 归并法
 class ListNode:
     def __init__(self, x):
         self.val = x
@@ -24,7 +24,7 @@ def sortList1(head):
         h = h.next # 这一步很关键
     h.next = l if l else r
     return res.next
-'''
+
 
 # O(1)空间复杂度
 class Solution:
