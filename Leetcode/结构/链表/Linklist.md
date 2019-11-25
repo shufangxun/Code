@@ -10,29 +10,29 @@
   - 快慢指针找到中点
   - 归并排序
 
-```python
-def sortList1(head):
-    if not head or not head.next:
-        return head
-    # 快慢指针找到中点
-    slow, fast = head, head.next
-    while fast and fast.next:
-        slow, fast = slow.next, fast.next.next
-    mid, slow.next = slow.next, None
-    # 归并
-    l = sortList1(head)
-    r = sortList1(mid)
-    # 哑变量
-    h = res = ListNode(0)
-    while l and r:
-        if l.val < r.val:
-            h.next, l = l, l.next
-        else:
-            h.next, r = r, r.next
-        h.next = h
+    ```python
+    def sortList1(head):
+        if not head or not head.next:
+            return head
+        # 快慢指针找到中点
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
+        mid, slow.next = slow.next, None
+        # 归并
+        l = sortList1(head)
+        r = sortList1(mid)
+        # 哑变量
+        h = res = ListNode(0)
+        while l and r:
+            if l.val < r.val:
+                h.next, l = l, l.next
+            else:
+                h.next, r = r, r.next
+            h.next = h
 
-    return res.next
-```
+        return res.next
+    ```
 
 - 循环式：时间复杂度 $O(nlogn)$，空间复杂度 $O(1)$
 
