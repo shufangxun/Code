@@ -5,7 +5,7 @@ class Solution1:
             return s
         # 初始化为False
         dp = [[False for _ in range(len(s))] for _ in range(len(s))]
-        maxlen, res = 1, s[0]   
+        maxlen, res = 1, s[0]
         for right in range(1, len(s)):
             for left in range(right):
                 # 包含长度为1和2的情况 关键所在
@@ -22,16 +22,16 @@ class Solution2:
     def longestPalindrome(self, s: str) -> str:
         if len(s) < 2:
             return s
-        maxlen, res = 1, s[0]   
-        
+        maxlen, res = 1, s[0]
         for i in range(len(s)):
             odd, lenodd = self.spreadCenter(s, i, i)
             even, leneven = self.spreadCenter(s, i, i + 1)
             curS = odd if lenodd >= leneven else even
             if len(curS) > maxlen:
                 maxlen = len(curS)
-                res = curS 
+                res = curS
         return res
+    # 提前计算了长度和序列
     def spreadCenter(self, s, i, j):
         left, right = i, j
         while left >= 0 and right < len(s) and s[left] == s[right]:
@@ -44,18 +44,17 @@ class Solution3:
     def longestPalindrome(self, s: str) -> str:
         if len(s) < 2:
             return s
-        
-        left, right = 0, 0  
+        left, right = 0, 0
         for i in range(len(s)):
             lenodd = self.spreadCenter(s, i, i)
             leneven = self.spreadCenter(s, i, i + 1)
             length = max(lenodd, leneven)
-
+            # 重新分配左右边界
             if length > right - left:
                 left = i - (length - 1) // 2
                 right = i + length // 2
         return s[left: right + 1]
-
+    # 只根据长度操作
     def spreadCenter(self, s, i, j):
         left, right = i, j
         while left >= 0 and right < len(s) and s[left] == s[right]:
