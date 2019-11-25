@@ -28,6 +28,6 @@ class Solution:
         if C == 1:
             cur.next = ListNode(C)
 
-        return dummy.next 
+        return dummy.next
 
 
