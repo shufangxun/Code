@@ -10,7 +10,6 @@ class Solution(object):
                 dict[num] += 1
             else:
                 dict[num] = 1
-        
         res = []
         for num in dict:
             if dict[num] == 1:
