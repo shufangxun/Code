@@ -21,7 +21,7 @@ class Solution1:
 # 优化 中心扩散
 class Solution2:
     def largestRectangleArea(self, heights: List[int]) -> int:
-        if heights is None: return 0
+        if heights is None or len(heights) == 0: return 0
         leftLessMin, rightLessMin = [0] * len(heights), [0] * len(heights)
         maxArea = 0
         # 初始化
@@ -40,7 +40,7 @@ class Solution2:
             rightLessMin[i] = p
 
         for i in range(len(heights)):
-            maxArea = max(maxArea, heights[i] * (rightLessMin - leftLessMin[i] - 1))
+            maxArea = max(maxArea, heights[i] * (rightLessMin[i] - leftLessMin[i] - 1))
         return maxArea
 
 
