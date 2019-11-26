@@ -7,7 +7,7 @@
 > 3、当戳破了气球 $i$ 后，气球 $left$ 和气球 $right$ 就变成了相邻的气球。  
 > 4、求所能获得硬币的最大数量。
 
-解法： 动态规划
+思路
 
 1. 状态
 设 $dp[i][j]$ 为 $i$ 到 $j$ 的序列最大值，所以要求的是 $dp[0][n-1]$
@@ -41,7 +41,7 @@ def maxCoins(nums):
 
 > 给定一个整数数组 $nums$ ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和
 
-解法：除了状态转移，还要看怎么遍历
+思路：除了状态转移，还要看怎么遍历
 
 ```python
 def sumofsubS(nums):
@@ -60,7 +60,7 @@ def sumofsubS(nums):
 
 > 需要 $n$ 阶才能到达楼顶，每次可以爬 $1$ 或 $2$ 个台阶。请问有多少种不同的方法可以爬到楼顶
 
-解法:
+思路
 
 - 状态  
 $dp[i]$：$i$ 个台阶爬楼梯的方法
@@ -87,7 +87,7 @@ def climbStairs(n):
 >2 . 每当你爬上一个阶梯你都要花费对应的体力花费值，然后你可以选择继续爬一个阶梯或者爬两个阶梯  
 >3 . 在开始时，你可以选择从索引为 $0$ 或 $1$ 的元素作为初始阶梯
 
-解法：
+思路
 
 - 状态  
 $dp[i]$：爬到第 $i$ 个台阶需要的体力
@@ -135,6 +135,8 @@ def uniquePaths(m, n):
 ## 机器人在网格中的不同路径2
 
 > 考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径
+
+思路
 
 - 状态方程  
 遇到障碍: $dp[i][j] = 0$  
@@ -192,7 +194,7 @@ def minPathSum(grid):
 
 > 给定一个字符串 S 和一个字符串 T，计算在 S 的子序列中 T 出现的个数。
 
-解法:
+思路
 
 - 先写出记录矩阵分析
 
@@ -238,6 +240,8 @@ def numDistinct(s, t):
 ## 判断子序列
 
 > 给定字符串 S 和 T ，判断 S 是否为 T 的子序列
+
+思路
 
 - 状态
 $dp[i][j]$：以第 $i$ 个元素结尾的 $S$ 序列包含以 $j$ 结尾的 $T$ 元素
@@ -423,6 +427,24 @@ def maximalSquare(self, matrix):
 
 > 给定一个仅包含 0 和 1 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积
 
-## 柱状图中最大矩形
+思路；结合柱状图中最大矩形的面积的方法，统计每一行上每一列的 1 的高度
 
-> 给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1，求在该柱状图中，能够勾勒出来的矩形的最大面积
+```python
+class Solution(object):
+    def maximalRectangle(self, matrix):
+        """
+        :type matrix: List[List[str]]
+        :rtype: int
+        """
+        if len(matrix) <= 0: return 0
+        heights = [0] * len(matrix[0])
+        maxArea = 0
+        for row in range(len(matrix)):
+            for col in range(len(matrix[0])):
+                if matrix[row][col] == '1':
+                    heights[col] += 1
+                else:
+                    heights[col] = 0
+            maxArea = max(maxArea, self.largestRectangleArea(heights))
+        return maxArea
+```
