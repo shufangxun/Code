@@ -17,7 +17,7 @@ class Solution1(object):
                 size = max(dp[i][j], size)
         return size * size
 
-# 优化 
+# 优化
 class Solution2(object):
     def maximalSquare(self, matrix):
         """
@@ -26,16 +26,17 @@ class Solution2(object):
         """
         if not matrix: return 0
         m, n = len(matrix), len(matrix[0]) # m为行数 n为列数
-        dp = [0] * n 
+        dp = [0] * n
         size = 0 # 边长
-        pre = 0
+        prev = 0
         for i in range(0, m):
             for j in range(0, n):
                 tmp = dp[j]
                 if matrix[i][j] == '0' or i == 0 or j == 0:
                     dp[j] = int(matrix[i][j]) - 0
                 else:
-                    dp[j] = int(min(dp[j], dp[j - 1], pre)) + 1
+                    dp[j] = int(min(dp[j], dp[j - 1], prev)) + 1
                 size = max(dp[j], size)
+                prev = tmp
         return size * size
 

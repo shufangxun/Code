@@ -398,6 +398,8 @@ def maximalSquare(matrix):
 ```
 
 - 优化
+- 时间复杂度: $O(mn)$
+- 空间复杂度: $O(n)$
 
 ```python
 def maximalSquare(self, matrix):
