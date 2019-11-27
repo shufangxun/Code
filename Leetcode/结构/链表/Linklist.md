@@ -165,3 +165,20 @@ def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
             cur.next = ListNode(1)
         return dummy.next
 ```
+
+## 删除链表中的节点
+
+> $O(1)$ 时间复杂度删除节点
+
+思路：将下一个节点值覆盖当前要删除节点，然后将下一个节点的下一个节点连接到当前节点之后
+
+```python
+class Solution:
+    def deleteNode(self, node):
+        """
+        :type node: ListNode
+        :rtype: void Do not return anything, modify node in-place instead.
+        """
+        node.val = node.next.val
+        node.next = node.next.next
+```
