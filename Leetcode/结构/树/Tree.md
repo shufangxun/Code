@@ -1,6 +1,8 @@
 # 二叉树
 
-## 前序遍历
+## 遍历
+
+### 前序遍历
 
 > 给定一个二叉树，写出前序遍历数组
 
@@ -35,7 +37,7 @@ class Solution:
         return ans
 ```
 
-## 中序遍历
+### 中序遍历
 
 > 给定一棵二叉树，写出中序遍历数组
 
@@ -82,7 +84,7 @@ class Solution:
         return ans
 ```
 
-## 后序遍历
+### 后序遍历
 
 >给定一个二叉树，返回它的后序遍历
 
@@ -117,6 +119,87 @@ class Solution:
 
 ```
 
+### 层次遍历
+
+> 给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）
+
+思路：运用队列，每层先保存，然后再将下一层存储
+
+```python
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        if root is None:
+            return res
+        queue = [root]
+        while queue:
+            curQ, nextQ = list(), list()
+            for node in queue:
+                curQ.append(node.val)
+                if node.left:
+                    nextQ.append(node.left)
+                if node.right:
+                    nextQ.append(node.right)
+            res.append(curQ)
+            queue = nextQ
+        return res
+```
+
+### 从前序与中序遍历序列构造二叉树
+
+>给出二叉树的前序和中序遍历, 重建二叉树
+
+```txt
+输入:  
+前序遍历：[3, 9, 20, 15, 7]  
+中序遍历：[9, 3, 15, 20, 7]  
+返回：  
+[3, 9, 20, null, null, 15, 7, null, null, null, null]
+```
+
+思路：
+前序遍历的第一个结点是根结点，以此划分中序遍历，左边是左子树，右边是是右子树
+
+```python
+class Solution(object):
+    def buildTree(self, preorder, inorder):
+        if not preorder or not inorder:
+            return None
+        root = TreeNode(preorder[0])
+        idx = inorder.index(preorder[0])
+
+        root.left = self.buildTree(preorder[1 : idx+1], inorder[ : idx])
+        root.right = self.buildTree(preorder[idx + 1: ], inorder[idx + 1: ])
+
+        return root
+```
+
+### 从中序与后序遍历序列构造二叉树
+
+> 给出中序和后序遍历数组．重建二叉树  
+
+```txt
+中序遍历 inorder = [9,3,15,20,7]  
+后序遍历 postorder = [9,15,7,20,3]
+```
+
+解法: 后序遍历的最后一个元素是根结点，以此划分中序遍历，右边是右子树，左边是左子树　　
+
+```python
+class Solution(object):
+    def buildTree(self, inorder, postorder):
+        if not inorder or not postorder:
+            return None
+
+        root = TreeNode(postorder[-1])
+        idx = inorder.index(postorder[-1])
+
+        root.left = self.buildTree(inorder[ : idx], postorder[: idx])
+        root.right = self.buildTree(inorder[idx + 1 :], postorder[idx : -1])
+
+        return root
+```
+
 ## 二叉树的下一个节点
 
 >给定一棵二叉树的其中一个节点，请找出中序遍历序列的下一个节点。
@@ -128,13 +211,6 @@ class Solution:
 2) 此节点是其父节点的右结点，则找到是其左结点的结点，返回父结点的父结点
 
 ```python
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-#         self.father = None
 class Solution(object):
     def inorderSuccessor(self, q):
         if q.right:
@@ -149,83 +225,6 @@ class Solution(object):
                 while q.father and q.father.right == q:
                     q = q.father
                 return q.father
-```
-
-## 从前序与中序遍历序列构造二叉树
-
->给出二叉树的前序和中序遍历, 重建二叉树:  
->输入:  
-前序遍历：[3, 9, 20, 15, 7]  
-中序遍历：[9, 3, 15, 20, 7]  
-返回：  
-[3, 9, 20, null, null, 15, 7, null, null, null, null]
-
-解法:
-前序遍历的第一个结点是根结点，以此划分中序遍历，左边是左子树，右边是是右子树
-
-```python
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution(object):
-    def buildTree(self, preorder, inorder):
-        """
-        :type preorder: List[int]
-        :type inorder: List[int]
-        :rtype: TreeNode
-        """
-        if not preorder or not inorder:
-            return None
-
-        root = TreeNode(preorder[0])
-        idx = inorder.index(preorder[0])
-
-        root.left = self.buildTree(preorder[1 : idx+1], inorder[ : idx])
-        root.right = self.buildTree(preorder[idx + 1: ], inorder[idx + 1: ])
-
-        return root
-```
-
-## 从中序与后序遍历序列构造二叉树
-
-> 给出中序和后序遍历数组．重建二叉树  
-
-```txt
-中序遍历 inorder = [9,3,15,20,7]  
-后序遍历 postorder = [9,15,7,20,3]
-```
-
-解法: 后序遍历的最后一个元素是根结点，以此划分中序遍历，右边是右子树，左边是左子树　　
-
-```python
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution(object):
-    def buildTree(self, inorder, postorder):
-        """
-        :type inorder: List[int]
-        :type postorder: List[int]
-        :rtype: TreeNode
-        """
-        if not inorder or not postorder:
-            return None
-
-        root = TreeNode(postorder[-1])
-        idx = inorder.index(postorder[-1])
-
-        root.left = self.buildTree(inorder[ : idx], postorder[: idx])
-        root.right = self.buildTree(inorder[idx + 1 :], postorder[idx : -1])
-
-        return root
 ```
 
 ## 对称二叉树
