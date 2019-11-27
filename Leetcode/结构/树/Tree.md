@@ -126,23 +126,47 @@ class Solution:
 思路：运用队列，每层先保存，然后再将下一层存储
 
 ```python
-class Solution:
-    def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        res = []
-        if root is None:
-            return res
-        queue = [root]
-        while queue:
-            curQ, nextQ = list(), list()
-            for node in queue:
-                curQ.append(node.val)
-                if node.left:
-                    nextQ.append(node.left)
-                if node.right:
-                    nextQ.append(node.right)
-            res.append(curQ)
-            queue = nextQ
+def levelOrder(root):
+    res = []
+    if root is None:
         return res
+    queue = [root]
+    while queue:
+        curQ, nextQ = list(), list()
+        for node in queue:
+            curQ.append(node.val)
+            if node.left:
+                nextQ.append(node.left)
+            if node.right:
+                nextQ.append(node.right)
+        res.append(curQ)
+        queue = nextQ
+    return res
+```
+
+### 层次遍历2
+
+> 给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
+
+思路：压入栈，再弹出栈
+
+```python
+def levelOrder(root):
+    res = []
+    if root is None:
+        return res
+    queue = [root]
+    while queue:
+        curQ, nextQ = list(), list()
+        for node in queue:
+            curQ.append(node.val)
+            if node.left:
+                nextQ.append(node.left)
+            if node.right:
+                nextQ.append(node.right)
+        res.insert(0, curQ)
+        queue = nextQ
+    return res
 ```
 
 ### 从前序与中序遍历序列构造二叉树
