@@ -193,8 +193,11 @@ class Solution(object):
 ## 从中序与后序遍历序列构造二叉树
 
 > 给出中序和后序遍历数组．重建二叉树  
-> 中序遍历 inorder = [9,3,15,20,7]  
+
+```txt
+中序遍历 inorder = [9,3,15,20,7]  
 后序遍历 postorder = [9,15,7,20,3]
+```
 
 解法: 后序遍历的最后一个元素是根结点，以此划分中序遍历，右边是右子树，左边是左子树　　
 
@@ -229,9 +232,13 @@ class Solution(object):
 
 >给定一个二叉树，检查它是否是镜像对称的.  
 
-解法：递归  
-基：当根结点为空时，返回True；当左右子树为空时：1) 左空右不空(或者右空左不空，返回False)；2) 左右都空，返回True  
-递归：左子树的左＝右子树的右 and 右子树的左＝左子树的右 and 左根＝右根　　
+法1：递归法
+
+- 怎么判断一棵树是不是对称二叉树  
+  如果根节点为空，那么是对称。如果不为空，判断左右子树是否对称
+- 如何判断左子树与右子树是否对称
+  - 左子树根节点和右子树根节点相等  
+  - 左子树的左孩子与右子树的右孩子对称，左子树的右孩子与右子树的左孩子对称，那么这个左子树和右子树就对称　　
 
 ```python
 class Solution(object):
@@ -240,16 +247,44 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
-        if root is None:
+        if root is None：
             return True
+        return self.
 
-        return self.dfs(root.left, root.right)
+    def check(self, node1, node2):
+        if not node1 and not node2:
+            return True
+        if not node1 or not node2:
+            return False
+        return node1.val == node2.val and self.check(node1.left, node2.right) and self.check(node1.right, node2.left)
+```
 
-    def dfs(self, l, r):
-        if not l or not r:
-            return not l and not r
+法2：迭代法
+层序遍历，判断每一层是否是回文数组
 
-        return l.val == r.val and self.dfs(l.left, r.right) and self.dfs(l.right, r.left)
+```python
+class Solution(object):
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        queue = [root]
+        while queue:
+            nexQ, curQ = list(), list()
+            for node in queue:
+                if not node:
+                    curQ.append(None)
+                    continue
+                curQ.append(node.val)
+                # 和层序遍历的区别
+                nexQ.append(node.left)
+                nexQ.append(node.right)
+            # 判断是否是回文数组
+            if curQ != curQ[::-1]:
+                return False
+            queue = nexQ
+        return True
 ```
 
 ## 镜像二叉树
@@ -364,7 +399,7 @@ def mergeTrees(t1, t2):
 
 ## 字典树
 
-要求
+题目要求
 
 ```python
 Trie trie = new Trie();
@@ -375,11 +410,9 @@ trie.search("app");     # 返回 false
 trie.startsWith("app"); # 返回 true
 trie.insert("app");
 trie.search("app");     # 返回 true
-
-
 ```
 
-代码
+实现代码
 
 ```python
 class Trie:
