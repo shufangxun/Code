@@ -25,7 +25,6 @@ def LIS1print(nums):
                     dp[i] = max(dp[i], dp[j] + 1) # 关键
     
     maxlen = max(dp)
-
     # 返回子序列
     subS = []
     for i in range(len(nums)-1, -1, -1):
@@ -59,7 +58,6 @@ def LIS2(nums):
     return len(queue)
 
 # 打印长度和序列值
-
 if __name__ == "__main__":
     a = [1,6,3,4,7,8,2,4,9,1,19,9,9]
     print(LIS1(a))
