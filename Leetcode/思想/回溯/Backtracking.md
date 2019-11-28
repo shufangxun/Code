@@ -61,9 +61,8 @@ class Solution:
             return
         for i in range(len(nums)):
             if not used[i]:
-
                 if i > 0 and nums[i] == nums[i - 1] and not used[i - 1]:
-                    continue 
+                    continue
                 used[i] = True
                 pre.append(nums[i])
                 # 继续搜索
