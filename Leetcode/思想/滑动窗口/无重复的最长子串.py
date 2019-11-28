@@ -5,8 +5,7 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        left = -1
-        ans = 0
+        left, ans = -1, 0
         lookup = [-1] * 128
         for i in range(len(s)):
             # 前一个出现在窗口内
