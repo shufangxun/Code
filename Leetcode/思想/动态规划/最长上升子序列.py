@@ -1,4 +1,5 @@
 # 不打印序列
+# O(n^2)
 def LIS1(nums):
     if len(nums) <= 1:
         return len(nums)
@@ -35,7 +36,7 @@ def LIS1print(nums):
     return subS 
     
 
-
+# O(nlogn)
 def LIS2(nums):
     if len(nums) <= 1:
         return len(nums)
