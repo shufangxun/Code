@@ -61,6 +61,7 @@ class Solution:
             return
         for i in range(len(nums)):
             if not used[i]:
+                # 这个数和之前的数一样，并且之前的数还未使用过，那接下来如果走这个分支，就会使用到之前那个和当前一样的数，就会发生重复
                 if i > 0 and nums[i] == nums[i - 1] and not used[i - 1]:
                     continue
                 used[i] = True
