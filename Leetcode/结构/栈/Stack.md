@@ -13,8 +13,8 @@
 
 法1：暴力法
 
-- 时间复杂度；$O(n_{2})$
-- 空间复杂度：$O(n)$
+- 时间复杂度；$O(N^{2})$
+- 空间复杂度：$O(N)$
 
 思路：找出所有高度下的最大矩形面积，选出最大的即可
 
@@ -48,7 +48,7 @@ def largestRectangleArea(heights):
 
 - 遍历每个柱子，只需找到比其矮的左侧第一个 leftLessMin 和右侧矮的第一个 rightLessMin，就可求出矩形的面积为 (rightLessMin - leftLessMin - 1) * 当前柱子高度。
 - 如何找这两个是关键
-  - $O(n_{2})$ 做法：用两个数组保存每一个柱子左侧或右侧第一个小的柱子
+  - $O(N^{2})$ 做法：用两个数组保存每一个柱子左侧或右侧第一个小的柱子
 
     ```python
     leftLessMin[0] = -1
@@ -59,7 +59,7 @@ def largestRectangleArea(heights):
         leftLessMin[i] = p
     ```
 
-  - $O(n)$ 做法：当前柱子 i 比上一个柱子 i-1 矮的时候，直接比较 leftLessMin[i - 1] 和 当前柱子 i 
+  - $O(N)$ 做法：当前柱子 i 比上一个柱子 i-1 矮的时候，直接比较 leftLessMin[i - 1] 和 当前柱子 i 
     - 因为柱子 i-1 高于 柱子 i，那么从第一个比 i-1 矮的柱子的后一个柱子到柱子 i-1 都是比柱子 i 高的，不需要比较，直接跳过
     - 只要改一行!
 
@@ -102,8 +102,8 @@ def largestRectangleArea(heights):
 
 法3：用栈做
 
-- 时间复杂度：$O(n)$
-- 空间复杂度：$O(n)$
+- 时间复杂度：$O(N)$
+- 空间复杂度：$O(N)$
 
 ```python
 
