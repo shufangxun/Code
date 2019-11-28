@@ -1,4 +1,5 @@
-def LCS(s1, s2):
+# 朴素
+def LCS1(s1, s2):
     m = len(s1)
     n = len(s2)
     dp = [[0 for i in range(n + 1)] for j in range(m + 1)]
@@ -11,6 +12,20 @@ def LCS(s1, s2):
     
     return dp[m][n]
 
+# 空间优化
+def LCS2(s1, s2):
+    m, n = len(s1), len(s2)
+    dp = [0 for i in range(n + 1)]
+    for i in range(1, m + 1):
+        pre = 0 # 上一个左上角 
+        for j in range(1, n + 1):
+            now = dp[j] #当前角要存储下来
+            if s1[i - 1] == s2[j - 1]:
+                dp[j] = pre + 1
+            else:
+                dp[j] = max(dp[j], dp[j - 1])
+            pre = now # 更新左上角
+    return dp[n]
 
 def PRINT_LCS(c, x, y, i, j):
 	if i == 0 or j == 0:

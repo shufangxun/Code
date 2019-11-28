@@ -55,9 +55,11 @@ def LIS2(nums):
     return len(Queue)
 ```
 
-## 最长公共子序列 
+## 最长公共子序列
 
 > 求两个序列的最长公共部分
+
+法1：朴素动态规划
 
 - 状态
 $dp[i][j]$：序列 S 前 i 部分和序列 T 前 j 部分的最长公共子序列部分 
@@ -71,8 +73,7 @@ $dp[i][j]$：序列 S 前 i 部分和序列 T 前 j 部分的最长公共子序�
 
 ```python
 def LCS(s1, s2):
-    m = len(s1)
-    n = len(s2)
+    m, n = len(s1), len(s2)
     dp = [[0 for i in range(n + 1)] for j in range(m + 1)]
     for i in range(1, m + 1):
         for j in range(1, n + 1):
@@ -83,6 +84,27 @@ def LCS(s1, s2):
     return dp[m][n]
 ```
 
+法2：空间优化 $O(N)$
+
+- 计算 $dp[i][j]$ 只和三个变量有关系：$dp[i-1][j-1]$、$dp[i][j-1]$、$dp[i-1][j]$
+- 先计算完上一行 $i-1$ 的最优解， 得到 $dp[i-1][j-1]$、$dp[i-1][j]$，但是缺 $dp[i][j-1]$)
+- 再计算这一行 $i$ 最优解，$dp[i][j-1]$ 把 $dp[i-1][j-1]$ 给覆盖了，所以实际只需要一维数组， 然后用一个 pre 来保存左上角被覆盖的 $dp[i-1][j-1]$ 即可
+
+```python
+def LCS(s1, s2):
+    m, n = len(s1), len(s2)
+    dp = [0 for i in range(n + 1)]
+    for i in range(1, m + 1):
+        pre = 0 # 上一个左上角 
+        for j in range(1, n + 1):
+            now = dp[j] #当前角要存储下来
+            if s1[i - 1] == s2[j - 1]:
+                dp[j] = pre + 1
+            else:
+                dp[j] = max(dp[j], dp[j - 1])
+            pre = now # 更新左上角
+    return dp[n]
+```
 
 ## 不同的子序列 115
 
