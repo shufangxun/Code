@@ -224,34 +224,9 @@ class Solution(object):
         return root
 ```
 
-## 二叉树的下一个节点
+## 二叉树操作
 
->给定一棵二叉树的其中一个节点，请找出中序遍历序列的下一个节点。
-
-解法:
-如果此结点有右子树，则遍历到最左结点；如果此结点没有右子树，则分类讨论
-
-1) 此结点是其父节点的左结点，则直接返回父节点
-2) 此节点是其父节点的右结点，则找到是其左结点的结点，返回父结点的父结点
-
-```python
-class Solution(object):
-    def inorderSuccessor(self, q):
-        if q.right:
-            q = q.right
-            while q.left:
-                q = q.left
-            return q
-        else:
-            if q.father.left = q:
-                return q.father
-            else:
-                while q.father and q.father.right == q:
-                    q = q.father
-                return q.father
-```
-
-## 对称二叉树
+### 对称二叉树
 
 >给定一个二叉树，检查它是否是镜像对称的.  
 
@@ -310,7 +285,7 @@ class Solution(object):
         return True
 ```
 
-## 镜像二叉树
+### 镜像二叉树
 
 >输入一个树，讲其变为自身镜像
 
@@ -330,43 +305,7 @@ class Solution(object):
         self.mirror(root.right)
 ```
 
-## 二叉树的最大深度
-
-> 给定一个二叉树，求最大深度
-
-解法：递归求左右子树的最大深度
-
-```python
-class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        if root is None:
-            return 0
-        l = self.maxDepth(root.left)
-        r = self.maxDepth(root.right)
-        return max(l, r) + 1
-```
-
-## 二叉树的最小深度
-
-> 1、给定一个二叉树，找出其最小深度。  
-> 2、最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
-
-解法：递归，注意叶子节点的定义
-
-- 叶子节点是没有左右孩子的节点
-
-```python
-def minDepth(root):
-    if root is None:
-        return 0
-    l = minDepth(root.left)
-    r = minDepth(root.right)
-    if root.left is None or root.right is None:
-        return l + r + 1
-    return min(l, r) + 1
-```
-
-## 平衡二叉树
+### 平衡二叉树
 
 > 如果某二叉树中任意结点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
 
@@ -395,7 +334,7 @@ class Solution(object):
         return max(l, r) + 1
 ```
 
-## 合并二叉树
+### 合并二叉树
 
 > 合并两个二叉树，重合结点对应值相加，不重合直接作为新树结点
 
@@ -420,7 +359,7 @@ def mergeTrees(t1, t2):
         return t1
 ```
 
-## 字典树
+### 字典树
 
 题目要求
 
@@ -485,4 +424,108 @@ class Trie:
                 return False
             cur = cur[w]
         return True
+```
+
+### 二叉树的下一个节点
+
+> 给定一棵二叉树的其中一个节点，请找出中序遍历序列的下一个节点。
+
+解法:
+如果此结点有右子树，则遍历到最左结点；如果此结点没有右子树，则分类讨论
+
+1) 此结点是其父节点的左结点，则直接返回父节点
+2) 此节点是其父节点的右结点，则找到是其左结点的结点，返回父结点的父结点
+
+```python
+class Solution(object):
+    def inorderSuccessor(self, q):
+        if q.right:
+            q = q.right
+            while q.left:
+                q = q.left
+            return q
+        else:
+            if q.father.left = q:
+                return q.father
+            else:
+                while q.father and q.father.right == q:
+                    q = q.father
+                return q.father
+```
+
+### 二叉树的最大深度
+
+> 给定一个二叉树，求最大深度
+
+解法：递归求左右子树的最大深度
+
+```python
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        l = self.maxDepth(root.left)
+        r = self.maxDepth(root.right)
+        return max(l, r) + 1
+```
+
+### 二叉树的最小深度
+
+> 1、给定一个二叉树，找出其最小深度。  
+> 2、最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
+
+解法：递归，注意叶子节点的定义
+
+- 叶子节点是没有左右孩子的节点
+
+```python
+def minDepth(root):
+    if root is None:
+        return 0
+    l = minDepth(root.left)
+    r = minDepth(root.right)
+    if root.left is None or root.right is None:
+        return l + r + 1
+    return min(l, r) + 1
+```
+
+## 两节点之和
+
+> 二叉搜索树，找两个节点之和
+
+思路1：先中序遍历，得到有序数组，然后双指针
+思路2: 边遍历边查找，遍历结果存入哈希表
+
+```python
+class Solution1:
+    def findTarget1(self, root, k):
+        nums = []
+        self.inorder(root, nums)
+        l, r = 0, len(nums) - 1
+        while l < r:
+            curSum = nums[l] + nums[r]
+            if curSum == k:
+                return True
+            elif curSum < k:
+                l += 1
+            else:
+                r -= 1
+        return False
+
+    def inorder(self, root, nums):
+        if root is None: return
+        self.inorder(root.left, nums)
+        nums.append(root.val)
+        self.inorder(root.right, nums)
+
+    def findTarget2(self, root, k):
+        if root is None: return False
+        bfs, s = [root], set()
+        for node in bfs:
+            if k - node.val in s:
+                return True
+            s.add(node.val)
+            if node.left: bfs.append(node.left)
+            if node.right: bfs.append(node.right)
+        return False
 ```
