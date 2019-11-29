@@ -44,3 +44,63 @@ def isSubsequence1(s, t):
             j += 1
     return False if i < len(s) else True
 ```
+
+## 两数之和系列
+
+### 无序数组两数之和
+
+> 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标
+
+思路: 哈希表
+
+- 时间复杂度：$O(n)$
+- 空间复杂度：$O(n)$
+
+```python
+def twoSum(nums, K):
+    d = dict()
+    for i in range(len(nums)):
+        tmp = K - nums[i]
+        if tmp in d:
+            return [i, d[tmp]]
+        d[nums[i]] = i
+    return None
+```
+
+### 有序数组两数之和
+
+思路:双指针分别指向头和尾
+
+```python
+def twoSum(self, numbers, target):
+    i, j = 0, len(numbers) - 1
+    while i < j:
+        curSum = numbers[i] + numbers[j]
+        if curSum == target:
+            return [i+1, j+1]
+        elif curSum < target:
+            i += 1
+        else:
+            j -= 1
+```
+
+### 小于K的两数之和
+
+> 给你一个整数数组 A 和一个整数 K，请在该数组中找出两个元素，使它们的和小于 K 但尽可能地接近 K，返回这两个元素的和
+
+思路: 排序加双指针
+
+```python
+def twoSumLessThanK(self, A: List[int], K: int) -> int:
+    A.sort()
+    maxSum = -1
+    i, j = 0, len(A) - 1
+    while i < j:
+        curSum = A[i] + A[j]
+        if curSum < K:
+            i += 1
+            maxSum = max(maxSum, curSum)
+        else:
+            j -= 1
+    return maxSum
+```
