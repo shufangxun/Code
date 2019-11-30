@@ -187,7 +187,9 @@ def isSubsequence(s, t):
     return dp[m-1][n-1]
 ```
 
-## 连续子数组最大和
+## 子序列和系列
+
+### 连续子数组最大和
 
 > 给定一个整数数组 $nums$ ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和
 
@@ -206,7 +208,127 @@ def sumofsubS(nums):
    return ans
 ```
 
-## 最长回文子串 [参考](https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/)  
+### 最大子矩阵和
+
+> 给出一个大小为 m x n 的矩阵，里面元素为 正整数 和 负整数 ，找到具有最大和的子矩阵
+
+- 维度压缩：遍历开始行 **up** 和结束行 **down**，计算对应列 **col** 和，注意计算时是两层循环得到所有范围
+- 应用最大子数组解法
+- 时间复杂度：$O(N^{3})$
+- 空间复杂度：$O(N^{2})$
+**法1**：枚举法
+需要定义一个求列和的函数
+
+```python
+# 计算up~down行的每一列和
+def compression(matrix, up, down, col):
+    sum = 0
+    for i in range(up, down + 1):
+        sum += matrix[i][col]
+    return sum
+
+def maxSubmatrix(matrix):
+    if len(matrix) == 0 or len(matrix[0]) == 0 or matrix is None:
+        return 0
+    m, n = len(matrx), len(matrix[0])
+    maxSum = 0
+    for up in range(m):
+        for down in range(up, m):
+            curSum = 0
+            # 连续子数组最大和
+            for col in range(n):
+                if curSum > 0:
+                    curSum += compression(matrix, up, down, col)
+                else:
+                    curSum = compression(matrix, up, down, col)
+                maxSum = max(maxSum, cuSum)
+    return maxSum
+```
+
+**法2**：预先存储1
+
+```python
+def maxSubmatrix(matrix):
+    # write your code here
+    if matrix is None or len(matrix) == 0 or len(matrix[0]) == 0:
+        return 0
+    m, n = len(matrx), len(matrix[0])
+    maxSum = 0
+    for up in range(m):
+        sum = [0 for m in range(n)]
+        for down in range(up, m):
+            for col in range(n):
+                sum[col] += matrix[down][col]
+            temp = maxSubarray(sum)
+            maxSum = max(maxSum, temp)
+    return maxSum
+
+def maxSubarray(array):
+    res = 0
+    sum = 0
+    for i in range(0, len(array)):
+        sum += array[i]
+        res = max(res, sum)
+        sum = max(sum, 0)
+    return res
+```
+
+**法3**：预先存储2
+
+- 为了在原始矩阵里很快得到从 **up** 行到 **down** 行 **clo** 之和，用一个辅助矩阵，它是原矩阵**从上到下加下来的所有和**
+- 如果要求第 **up** 行到第 **down** 行之间第 **col** 列和，可以通过 total[down][col] - total[up][col] 得到
+
+```python
+class Solution2:
+    def maxSubmatrix(self, matrix):
+        if matrix is None or len(matrix) == 0 or len(matrix[0]) == 0:
+            return 0
+        # 定义空间 注意第一行之前再定义一个全0行
+        m, n = len(matrix), len(matrix[0])
+        total = [[0] * n for _ in range(m+1)]
+        maxSum = 0
+        # 计算前缀和 特殊处理第一行
+        for i in range(m+1):
+            for j in range(n):
+                if i == 1:
+                    total[i][j] = matrix[i-1][j]
+                if i >= 2:
+                    total[i][j] = total[i - 1][j] + matrix[i-1][j]
+        # 计算范围和
+        for up in range(1, m+1):
+            for down in range(up, m+1):
+                curSum = 0
+                for col in range(n):
+                    if curSum >= 0:
+                        curSum += total[down][col] - total[up-1][col]
+                    else:
+                        curSum = total[down][col] - total[up-1][col]
+                    maxSum = max(curSum, maxSum)
+        return maxSum
+```
+
+空间复杂度 $O(N)$ 的解法
+
+```python
+class Solution:
+    def maxSubmatrix(self, matrix):
+        if not matrix or not matrix[0]:
+            return 0
+        maxSum = - sys.maxsize
+        rows, columns = len(matrix), len(matrix[0])
+        for topRow in range(rows):
+            compressedRow = [0] * columns
+            for row in range(topRow, rows):
+                minSum，nextPrefixSum = 0, 0
+                for col in range(columns):
+                    compressedRow[col] += matrix[row][col]
+                    nextPrefixSum += compressedRow[col]
+                    maxSum = max(maxSum, nextPrefixSum - minSum)
+                    minSum = min(minSum, nextPrefixSum)
+        return maxSum
+```
+
+## 最长回文子串 [参考](https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/)
 
 > 给定一个字符串 s，找到 s 中最长的回文子串
 
