@@ -1,10 +1,6 @@
 # 法1
 class Solution(object):
     def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
         left, ans = -1, 0
         lookup = [-1] * 128
         for i in range(len(s)):
@@ -16,6 +12,21 @@ class Solution(object):
         return ans
 
 # 法2
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        left, ans = -1, 0
+        lookup = {}
+        for i in range(len(s)):
+            # 前一个出现在窗口内
+            if s[i] in lookup and lookup[s[i]] > left:
+                left = lookup[s[i]]
+            else:
+                ans = max(ans, i - left)
+            lookup[s[i]] = i
+        return ans
+
+
+# 法3
 def lengthOfLongestSubstring(s):
     lookup = {}
     i, ans = 0, 0
@@ -26,7 +37,7 @@ def lengthOfLongestSubstring(s):
         lookup[s[j]] = j + 1
     return ans
 
-# 法3
+# 法4
 def lengthOfLongestSubstring(s):
     lookup = [0] * 128
     left, right = 0, 0
