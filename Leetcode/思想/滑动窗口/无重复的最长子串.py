@@ -17,6 +17,17 @@ class Solution(object):
 
 # 法2
 def lengthOfLongestSubstring(s):
+    lookup = {}
+    i, ans = 0, 0
+    for j in range(len(s)):
+        if s[j] in lookup:
+            i = max(lookup[s[j]], i)
+        ans = max(ans, j - i + 1)
+        lookup[s[j]] = j + 1
+    return ans
+
+# 法3
+def lengthOfLongestSubstring(s):
     lookup = [0] * 128
     left, right = 0, 0
     counter = 0
@@ -28,7 +39,6 @@ def lengthOfLongestSubstring(s):
         # 不管出没出现，都需要统计出现次数，移动右指针
         lookup[ord(s[right])] += 1
         right += 1
-        
         while counter > 0:
             # 当有重复时
             if lookup[ord(s[left])] > 1:
@@ -38,6 +48,4 @@ def lengthOfLongestSubstring(s):
             left += 1
         maxlen = max(maxlen, right - left)
     return maxlen
-
-            
 
