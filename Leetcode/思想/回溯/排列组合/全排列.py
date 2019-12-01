@@ -1,10 +1,10 @@
 class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
+    def permute(self, nums):
         if len(nums) == 0: return []
         used, res = [False] * len(nums), []
         self.DFS(nums, 0, [], used, res)
         return res
-    
+
     def DFS(self, nums, index, pre, used, res):
         # 满足条件时，保存一个结果
         if index == len(nums):
