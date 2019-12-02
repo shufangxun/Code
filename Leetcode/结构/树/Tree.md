@@ -529,3 +529,47 @@ class Solution1:
             if node.right: bfs.append(node.right)
         return False
 ```
+
+## 路径总和系列
+
+### 路径总和 I
+
+> 给一个二叉树 T 和值 Sum, 求是否存在这个路径
+
+思路: 左右存在一个就行
+
+```python
+class Solution:
+    def hasPathSum(self, root: TreeNode, sum: int) -> bool:
+        if root is None:
+            return False
+        elif root.left is None and root.right is None:
+            return root.val == sum
+        else:
+            return self.hasPathSum(root.right, sum - root.val) or self.hasPathSum(root.left, sum - root.val)
+```
+
+### 路径总和 II
+
+> 求满足值 Sum 的所有路径
+
+思路: DFS + Backtracking
+
+- 注意 append 的是 path[:] 而不是 path，因为会回溯 pop，path[:] 是深拷贝
+
+```python
+def pathSum(root, sum):
+    res = []
+    DFS(root, sum, [], res)
+    return res
+def DFS(root, sum, path, res):
+    if root is None:
+        return []
+    path.append(root.val)
+    if root.left is None and root.right is None and sum == root.val:
+        res.append(path[:])
+    else:
+        DFS(root.left, sum - root.val, path, res)
+        DFS(root.left, sum - root.val, path, res)
+    path.pop()
+```
