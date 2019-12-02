@@ -224,6 +224,33 @@ class Solution(object):
         return root
 ```
 
+### 有序数组变为二叉搜索平衡树
+
+> 将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树
+
+思路
+
+1. 如何得到平衡二叉树 - 二分法
+2. 二叉搜索树左子树小于根，右子树大于根
+3. 二叉搜索树的中序遍历是升序数组
+
+```python
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        if nums is None:
+            return None
+        return self.isTree(nums, 0, len(nums)-1)
+
+    def isTree(self, nums, l, r):
+        if l > r:
+            return None
+        m = (l + r) // 2
+        root = TreeNode(nums[m])
+        root.left = self.isTree(nums, l, m-1)
+        root.right = self.isTree(nums, m+1, r)
+        return root
+```
+
 ## 二叉树操作
 
 ### 对称二叉树
@@ -530,6 +557,42 @@ class Solution1:
         return False
 ```
 
+### 二叉树的层平均值
+
+> 给定一个非空二叉树, 返回一个由每层节点平均值组成的数组.
+
+```python
+class Solution:
+    def averageOfLevels1(self, root: TreeNode) -> List[float]:
+        if root is None: return None
+        queue = [root]
+        res = []
+        while queue:
+            curQ, nextQ = [], []
+            for node in queue:
+                curQ.append(node.val)
+                if node.left: nextQ.append(node.left)
+                if node.right: nextQ.append(node.right)
+            res.append(float(sum(curQ)) / len(curQ))
+            queue = nextQ
+        return res
+
+    def averageOfLevels2(self, root: TreeNode) -> List[float]:
+        if root is None: return None
+        queue = [root]
+        res = []
+        while queue:
+            n = len(queue)
+            sum = 0
+            for i in range(n):
+                node = queue.pop(0)
+                sum += node.val
+                if node.left: queue.append(node.left)
+                if node.right: queue.append(node.right)
+            res.append(sum/n)
+        return res
+```
+
 ## 路径总和系列
 
 ### 路径总和 I
@@ -573,3 +636,4 @@ def DFS(root, sum, path, res):
         DFS(root.left, sum - root.val, path, res)
     path.pop()
 ```
+
