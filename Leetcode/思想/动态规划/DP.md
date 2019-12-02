@@ -115,3 +115,49 @@ class Solution(object):
             maxArea = max(maxArea, self.largestRectangleArea(heights))
         return maxArea
 ```
+
+## 买卖股票的最佳时机系列
+
+### I
+
+> 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格，求最大利润
+
+法1：前i天的最大收益 = max{前i-1天的最大收益，第i天的价格-前i-1天中的最小价格}
+
+```python
+class Solution:
+   def maxProfit(self, prices: List[int]) -> int:
+      if len(prices) <= 1:
+         return 0
+      dp = [0] * len(prices)
+      minPrice = prices[0]
+      for i in range(1, len(prices)):
+         dp[i] = max(dp[i - 1], prices[i] - minPrice)
+         minPrice = min(minPrice, prices[i])
+      return max(dp)
+```
+
+法2：区间和跟求差可以相互转换。题目就转变为求最大连续子数组和
+
+- 首先构造 diff 数组，求连续两天的价格差
+- 状态转移方程 dp[i] = max(dp[i-1] + diff[i], 0), dp[i] 指以 i 元素结尾的子数组的最大和
+- 接着遍历 diff 数组，根据状态转移方程求出 dp 数组
+- 最后 dp 数组中的最大值就是最大价格差
+
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if len(prices)<=1:
+            return 0
+        diff = [0 for _ in range(len(prices)-1)]
+        for i in range(len(prices)-1):
+            diff[i] = prices[i+1]-prices[i]
+        dp = [0 for _ in range(len(prices)-1)]
+        dp[0] = max(0, diff[0])
+        max_profit = dp[0]
+        for i in range(1, len(prices)-1):
+            dp[i] = max(0, diff[i]+dp[i-1])
+            max_profit = max(max_profit, dp[i])
+        return max_profit
+```
+
