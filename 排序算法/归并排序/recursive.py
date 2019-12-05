@@ -2,7 +2,7 @@ def mergesort(arr):
     '''
     主函数入口
     1.先分后治，递归分数组，然后调用排序合并
-       '''
+    '''
     if len(arr) <= 1:
         return arr
     mid = len(arr) // 2

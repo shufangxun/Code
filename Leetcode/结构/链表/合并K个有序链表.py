@@ -5,7 +5,7 @@ class Solution:
         n = len(lists)
         return self.merge(lists, 0, n - 1)
     # 分链表
-    def merge(self, lists, left, right):
+    def merges(self, lists, left, right):
         if left == right:
             return lists[left]
         mid = left + (right - left) // 2
