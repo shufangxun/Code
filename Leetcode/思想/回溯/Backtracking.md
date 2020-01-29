@@ -1,16 +1,27 @@
 # 回溯
 
-## 全排列 I
+回溯实际上是一个决策树的遍历过程，都思考3个问题：
+- 路径：已经做出的选择
+- 选择列表：当前可以做的选择
+- 结束条件：到达决策树底层，无法再做选择的条件
+
+整体框架如下
+```python
+result = []
+def backtrack(路径, 选择列表):
+    if 满足结束条件:
+        result.add(路径)
+        return
+    
+    for 选择 in 选择列表:
+        做选择
+        backtrack(路径, 选择列表)
+        撤销选择
+```
+
+### 46. 全排列 I
 
 > 给定一个没有重复数字的序列，返回其所有可能的全排列
-
-思路
-
-- 定义 used 数组
-  保证上一层选过的数字不在下一层出现，使用一个数组长度这么长的额外空间
-- 栈弹出回溯
-  - 释放对最后一个数的占用
-  - 将最后一个数从当前选取的排列中弹出
 
 ```python
 class Solution:
@@ -36,7 +47,7 @@ class Solution:
                 pre.pop()
 ```
 
-## 全排列 II
+### 全排列 II
 
 > 给定一个可包含重复数字的序列，返回所有不重复的全排列
 
@@ -74,4 +85,26 @@ class Solution:
                 #回溯时要记得状态重置
                 used[i] = False
                 pre.pop()
+```
+
+### 22. 括号生成
+
+> 给出n代表生成括号对数，给出所有括号情况
+
+```python
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+        self.dfs("", res, n, n)
+        return res
+
+    def dfs(self, sublist, res, left, right):
+        if left == 0 and right == 0:
+            res.append(sublist)
+        if right < left:
+            return
+        if left > 0:
+            self.f(sublist + '(', res, left-1, right)
+        if right > 0:
+            self.f(sublist + ')', res, left, right-1)
 ```
