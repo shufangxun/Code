@@ -11,4 +11,6 @@
 
 
 ### To do
-[数据结构](https://www.icourse163.org/learn/ZJU-93001?tid=1207006212#/learn/content?type=detail&id=1212031623&cid=1215166133)
+[陈越 数据结构](https://www.icourse163.org/learn/ZJU-93001?tid=1207006212#/learn/content?type=detail&id=1212031623&cid=1215166133)
+
+[王争 数据结构和算法](https://time.geekbang.org/column/intro/126)
