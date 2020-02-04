@@ -1,6 +1,6 @@
 # 栈
 
-## 柱状图中最大的矩形
+## 84. 柱状图中最大的矩形
 
 [参考](https://leetcode.wang/leetCode-84-Largest-Rectangle-in-Histogram.html)
 

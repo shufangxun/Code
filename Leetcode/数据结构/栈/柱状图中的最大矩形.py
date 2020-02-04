@@ -1,22 +1,18 @@
 # 暴力法
-class Solution1:
+class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
-        # 得到高度种类
-        heightCount = set(heights)
-        maxArea = 0
-        for h in heightCount:
-            width, maxWidth = 0, 1
-            # 找连续的高于h的柱
-            for i in range(len(heights)):
-                if heights[i] > h:
-                    width += 1
-                else:
-                    maxWidth = max(maxWidth, width)
-                    width = 0
-            # 更新最大面积
-            maxWidth = max(width, maxWidth)
-            maxArea = max(maxArea, h * maxWidth)
-        return maxArea
+        res = 0
+        n = len(heights)
+        for i in range(n):
+            left_i = i
+            right_i = i
+            while left_i >= 0 and heights[left_i] >= heights[i]:
+                left_i -= 1
+            while right_i < n and heights[right_i] >= heights[i]:
+                right_i += 1
+            res = max(res, (right_i - left_i - 1) * heights[i])
+        return res
+        
 
 # 优化 中心扩散
 class Solution2:
@@ -42,5 +38,30 @@ class Solution2:
         for i in range(len(heights)):
             maxArea = max(maxArea, heights[i] * (rightLessMin[i] - leftLessMin[i] - 1))
         return maxArea
+ 
+# 单调栈
+class Solution1:
+    def largestRectangleArea(self, heights: List[int]):
+        S = []
+        area = 0
+        heights = [0] + heights + [0]
+        for i in range(len(heights)):
+            while S and heights[S[-1]] > heights[i]: 
+            area = max(area, heights[S.pop()] * (i - S[-1] - 1))
+            S.append(i)
+        return area  
+
+class Solution2:
+    def largestRectangleArea(self, heights: List[int]):
+        S = [-1]
+        area = 0
+        for i in range(len(heights)):
+            while S[-1] != -1 and heights[S[-1]] > heights[i]: 
+                area = max(area, heights[S.pop()] * (i - S[-1] - 1))
+            S.append(i)
+        while S[-1] != -1:
+            area = max(area,  heights[S.pop()] * (len(heights)-S[-1]-1))
+        return area
+
 
 
