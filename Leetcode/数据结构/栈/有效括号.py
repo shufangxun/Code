@@ -5,6 +5,8 @@ class Solution:
         for c in s:
             if c in dict.keys():
                 stack.append(dict[c])
+            # 中间态 -- ())
             elif len(stack) == 0 or c != stack.pop():
                 return False
+        
         return len(stack) == 0 
