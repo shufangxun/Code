@@ -18,5 +18,6 @@ class Solution:
                 base <<= 1 # base * 2
             res += cnt
             dvd -= base # 减完之后再次判断是否 dvd >= div
+            
         res = res if (dividend < 0) ^ (divisor < 0) == 0 else -res
         return INT_MAX if res > INT_MAX or res < INT_MIN else res
